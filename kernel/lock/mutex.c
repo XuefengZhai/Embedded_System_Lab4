@@ -80,8 +80,33 @@ int mutex_lock(int mutex  __attribute__((unused)))
         return -EINVAL;
     }
     
+    mutex_tmp = &gtMutex[mutex];
     
+    if(mutex_tmp->bAvailable)
+    {
+        enable_interrupts();
+        return -EINVAL;
+    }
     
+    cur_tcb = get_cur_tab();
+    
+    if(mutex_tmp->pHolding_Tcb == cur_tcb)
+    {
+        enable_interrupts();
+        return -EDEADLOCK;
+    }
+    
+    if(!mutex_tmp->block)
+    {
+        mutex_tmp->block = TRUE;
+        mutex_tmp->pHolding_Tcb = cur_tcb;
+        enable_interrupts();
+        return 0;
+    }
+    else
+    {
+        
+    }
 }
 
 int mutex_unlock(int mutex  __attribute__((unused)))
