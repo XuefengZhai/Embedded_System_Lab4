@@ -58,8 +58,7 @@ int mutex_create(void)
     }
     else
     {
-        printf("There are no available mutex!\n");
-        enable_interrupts();
+        enable_interrupts(); //No available mutex
         return -ENOMEM;
     }
 	
@@ -76,7 +75,6 @@ int mutex_lock(int mutex  __attribute__((unused)))
     if (mutex < 0 || mutex >= OS_NUM_MUTEX)
     {
         enable_interrupts();
-        printf("mutes number is invalid");
         return -EINVAL;
     }
     
@@ -96,21 +94,61 @@ int mutex_lock(int mutex  __attribute__((unused)))
         return -EDEADLOCK;
     }
     
-    if(!mutex_tmp->block)
+    else if (mutex_tmp->block)//add to sleep queue
     {
-        mutex_tmp->block = TRUE;
-        mutex_tmp->pHolding_Tcb = cur_tcb;
-        enable_interrupts();
-        return 0;
-    }
-    else
-    {
+        tcb_t *sleep_tcb;
+        tcb_t *tmp_tcb = NULL;
         
+        if (mutex_tmp->pSleep_queue == NULL)
+        {
+            mutex_tmp->pSleep_queue = cur_tcb;
+            cur_tcb->sleep_queue = NULL;
+        }
+        else
+        {
+            sleep_tcb = mutex_tmp->pSleep_queue;
+            while(sleep_tcb != NULL)
+            {
+                tmp_tcb = sleep_tcb;
+                sleep_tcb = sleep_tcb->sleep_queue;
+            }
+            tmp_tcb->sleep_queue = cur_tcb;
+            cur_tcb->sleep_queue = NULL;
+            
+        }
+        
+        dispatch_sleep();
     }
+    
+    mutex_tmp->block = TRUE;
+    mutex_tmp->pHolding_Tcb = cur_tcb;
+    enable_interrupts();
+    
+    return 0;
 }
 
 int mutex_unlock(int mutex  __attribute__((unused)))
 {
-	return 1; // fix this to return the correct value
+    tcb_t * cur_tcb;
+    mutex_t mutex_tmp;
+
+    disable_interrupts();
+    
+    if (mutex < 0 || mutex >= OS_NUM_MUTEX)
+    {
+        enable_interrupts();
+        return -EINVAL;
+    }
+    
+    mutex_tmp = &gtMutex[mutex];
+    
+    if(mutex_tmp->bAvailable)
+    {
+        enable_interrupts();
+        return -EINVAL;
+    }
+    
+    
+    
 }
 
