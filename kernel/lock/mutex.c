@@ -66,8 +66,8 @@ int mutex_create(void)
 
 int mutex_lock(int mutex  __attribute__((unused)))
 {
-	tcb_t * cur_tcb;
-    mutex_t mutex_tmp;
+	tcb_t * cur_tcbget_cur_tab();
+    mutex_t mutex_tmp=&gtMutex[mutex];
     
     disable_interrupts();
     
@@ -78,46 +78,46 @@ int mutex_lock(int mutex  __attribute__((unused)))
         return -EINVAL;
     }
     
-    mutex_tmp = &gtMutex[mutex];
     
-    if(mutex_tmp->bAvailable)
+    else if(mutex_tmp->bAvailable)
     {
         enable_interrupts();
         return -EINVAL;
     }
     
-    cur_tcb = get_cur_tab();
-    
-    if(mutex_tmp->pHolding_Tcb == cur_tcb)
+    else if(mutex_tmp->pHolding_Tcb == cur_tcb)
     {
         enable_interrupts();
         return -EDEADLOCK;
     }
     
-    else if (mutex_tmp->block)//add to sleep queue
+    else //add to sleep queue
     {
-        tcb_t *sleep_tcb;
-        tcb_t *tmp_tcb = NULL;
+        if (mutex_tmp->block)
+        {
+            tcb_t *sleep_tcb;
+            tcb_t *tmp_tcb = NULL;
         
-        if (mutex_tmp->pSleep_queue == NULL)
-        {
-            mutex_tmp->pSleep_queue = cur_tcb;
-            cur_tcb->sleep_queue = NULL;
-        }
-        else
-        {
-            sleep_tcb = mutex_tmp->pSleep_queue;
-            while(sleep_tcb != NULL)
+            if (mutex_tmp->pSleep_queue == NULL)
             {
+                mutex_tmp->pSleep_queue = cur_tcb;
+                cur_tcb->sleep_queue = NULL;
+            }
+            else
+            {
+                sleep_tcb = mutex_tmp->pSleep_queue;
+                while(sleep_tcb != NULL)
+                {
                 tmp_tcb = sleep_tcb;
                 sleep_tcb = sleep_tcb->sleep_queue;
-            }
+                }
             tmp_tcb->sleep_queue = cur_tcb;
             cur_tcb->sleep_queue = NULL;
             
-        }
+            }
         
-        dispatch_sleep();
+            dispatch_sleep();
+        }
     }
     
     mutex_tmp->block = TRUE;
@@ -129,8 +129,8 @@ int mutex_lock(int mutex  __attribute__((unused)))
 
 int mutex_unlock(int mutex  __attribute__((unused)))
 {
-    tcb_t * cur_tcb;
-    mutex_t mutex_tmp;
+    tcb_t * cur_tcb = get_cur_tcb();
+    mutex_t mutex_tmp = &gtMutex[mutex];
 
     disable_interrupts();
     
@@ -140,14 +140,24 @@ int mutex_unlock(int mutex  __attribute__((unused)))
         return -EINVAL;
     }
     
-    mutex_tmp = &gtMutex[mutex];
     
-    if(mutex_tmp->bAvailable)
+    else if(mutex_tmp->bAvailable)
     {
         enable_interrupts();
         return -EINVAL;
     }
     
+    
+    else if (cur_tcb != mutex_tmp.pHolding_Tcb)
+    {
+        enable_interrupts();
+        return -EPERM;
+    }
+    
+    else
+    {
+        
+    }
     
     
 }
