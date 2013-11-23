@@ -168,6 +168,9 @@ int mutex_unlock(int mutex  __attribute__((unused)))
             next_tcb->sleep_queue = NULL;
             runqueue_add(next_tcb, next_tcb->cur_prio);
         }
+        
+        enable_interrupts();
+        return 0;
 
     }
     
