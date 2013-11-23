@@ -40,8 +40,18 @@ FUNC(launch_task)
 
 /* r0 points to the target context, r1 to the current context. */
 /* add your code to perform a full context switch */
+/* save the current context and load context */
 FUNC(ctx_switch_full)
-
+	stmia	r1,{r4-r11,sp,lr}
+	ldmfd	r0,{r4-r11,sp,lr}
+	mov	pc,lr
 
 /*add your code to perform a half context switch */	
 FUNC(ctx_switch_half)
+	ldm	r0,{r4-r11,sp,lr}
+	mov	pc,lr
+
+
+
+
+

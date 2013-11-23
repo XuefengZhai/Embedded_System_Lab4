@@ -13,7 +13,8 @@
 #include <sched.h>
 #include "sched_i.h"
 
-
+#define SHIFT 3
+#define POSITION_MASK 0x7
 
 static tcb_t* run_list[OS_MAX_TASKS]  __attribute__((unused));
 
@@ -58,7 +59,14 @@ static uint8_t prio_unmap_table[]  __attribute__((unused)) =
  */
 void runqueue_init(void)
 {
-	
+	int i;
+	group_run_bits = 0;
+	for(i=0;i<OS_MAX_TASKS/8;i++){
+		run_bits[i] = 0;
+	}
+	for(i=0;i<OS_MAX_TASKS;i++){
+		run_list[i] = 0;
+	}
 }
 
 /**
@@ -71,7 +79,13 @@ void runqueue_init(void)
  */
 void runqueue_add(tcb_t* tcb  __attribute__((unused)), uint8_t prio  __attribute__((unused)))
 {
-	
+	//add task to run list
+	run_list[prio] = tcb;
+	//mask the group_run_bits (eg. n/x == n>>log(x))
+	group_run_bits |= (0x1 << (prio >> SHIFT));
+	//mask the run_bits (eg. n%x == n&(x-1))
+	run_bits[prio >> SHIFT] |= (0x1 << (prio & POSITION_MASK ));
+		
 }
 
 
@@ -84,14 +98,38 @@ void runqueue_add(tcb_t* tcb  __attribute__((unused)), uint8_t prio  __attribute
  */
 tcb_t* runqueue_remove(uint8_t prio  __attribute__((unused)))
 {
-	return (tcb_t *)1; // fix this; dummy return to prevent warning messages	
-}
+	tcb_t *removed_tcb = NULL;
+	//remove from run_list
+	removed_tcb = run_list[prio];
+	run_list[prio] = NULL;
 
+	//change run_bits
+	run_bits[prio >> SHIFT] &= ~(0x1 << (prio & POSITION_MASK));
+
+	//change group_run_bits if needed
+	if(run_bits[prio >> SHIFT] == 0){
+		group_run_bits &= ~(0x1 << (prio >> SHIFT ));
+	}
+
+	return removed_tcb;
+
+}
 /**
  * @brief This function examines the run bits and the run queue and returns the
  * priority of the runnable task with the highest priority (lower number).
  */
 uint8_t highest_prio(void)
 {
-	return 1; // fix this; dummy return to prevent warning messages	
+	uint8_t group_num, group_pos, prio;
+	//find group_num
+	group_num = prio_umap_table[group_run_bits];
+	//find position in the group
+	group_pos = prio_umap_table[run_bits[group_num]];
+
+	//calculate the priority
+	prio = (group_num << SHIFT) + group_pos;
+
+	return prio;	
 }
+
+
