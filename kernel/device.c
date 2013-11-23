@@ -16,6 +16,8 @@
 #include <arm/psr.h>
 #include <arm/exception.h>
 
+define MAX_INT 0xFFFFFFFF
+
 /**
  * @brief Fake device maintainence structure.
  * Since our tasks are periodic, we can represent 
@@ -45,8 +47,14 @@ static dev_t devices[NUM_DEVICES];
  */
 void dev_init(void)
 {
-   /* the following line is to get rid of the warning and should not be needed */	
-   devices[0]=devices[0];
+    int i;
+    
+    for(i = 0; i < NUM_DEVICES; i++)
+    {
+        devices[i].next_match = dev_freq[i];
+        devices[i].sleep_queue = NULL;
+    }
+
 }
 
 
@@ -58,7 +66,13 @@ void dev_init(void)
  */
 void dev_wait(unsigned int dev __attribute__((unused)))
 {
-	
+    disable_interrupts();
+    tcb_t* cur_tcb = get_cur_tcb();
+    cur_tcb->sleep_queue = devices[dev].sleep_queue;
+    devices[dev].sleep_queue = cur_tcb;
+    dispatch_sleep();
+    enable_interrupts();
+
 }
 
 
@@ -71,6 +85,27 @@ void dev_wait(unsigned int dev __attribute__((unused)))
  */
 void dev_update(unsigned long millis __attribute__((unused)))
 {
-	
+	int i = 0;
+	unsigned long max = MAX_INT;
+        tcb_t *temp_tcb;
+        while(i < NUM_DEVICES){
+                 if(devices[i].next_match == millis) {
+                        while(devices[i].sleep_queue != NULL) {
+                                temp_tcb = devices[i].sleep_queue;
+                                runqueue_add(temp_tcb, temp_tcb->cur_prio);
+                                devices[i].sleep_queue = temp_tcb->sleep_queue;
+                                temp_tcb->sleep_queue = NULL;
+                        }
+
+                        /*
+                         * check overflow
+                         */
+                        if(max - devices[i].next_match < dev_freq[i]){
+                                printf("overflow in next match: %d \n", i);
+                        }
+                        devices[i].next_match += dev_freq[i];
+                }
+                i++;
+        }
 }
 
