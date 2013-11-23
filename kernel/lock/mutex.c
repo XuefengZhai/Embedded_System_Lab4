@@ -67,7 +67,7 @@ int mutex_create(void)
 int mutex_lock(int mutex  __attribute__((unused)))
 {
 	tcb_t * cur_tcbget_cur_tab();
-    mutex_t mutex_tmp=&gtMutex[mutex];
+    mutex_t *mutex_tmp=&gtMutex[mutex];
     
     disable_interrupts();
     
@@ -129,8 +129,9 @@ int mutex_lock(int mutex  __attribute__((unused)))
 
 int mutex_unlock(int mutex  __attribute__((unused)))
 {
-    tcb_t * cur_tcb = get_cur_tcb();
-    mutex_t mutex_tmp = &gtMutex[mutex];
+    tcb_t *cur_tcb = get_cur_tcb();
+    tcb_t *next_tcb;
+    mutex_t *mutex_tmp = &gtMutex[mutex];
 
     disable_interrupts();
     
@@ -157,6 +158,17 @@ int mutex_unlock(int mutex  __attribute__((unused)))
     else
     {
         
+        mut->bLock = FALSE;
+        mut->pHolding_Tcb = NULL;
+        
+        if(mut->pSleep_queue != NULL)
+        {
+            next_tcb = mut->pSleep_queue;
+            mut->pSleep_queue = next_tcb->sleep_queue;
+            next_tcb->sleep_queue = NULL;
+            runqueue_add(next_tcb, next_tcb->cur_prio);
+        }
+
     }
     
     
