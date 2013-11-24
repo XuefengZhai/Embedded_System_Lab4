@@ -22,7 +22,6 @@ tcb_t system_tcb[OS_MAX_TASKS]; /*allocate memory for system TCBs */
 
 void sched_init(task_t* main_task  __attribute__((unused)))
 {
-<<<<<<< HEAD
 	main_task->lambda = (task_fun_t)idle;
 	main_task->data = NULL;
 	main_task->stack_pos = system_tcb[IDLE_PRIO].kstack_high;
@@ -50,9 +49,6 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
 	context->r11 = 0x0;
 	tcb->holds_lock = 0;
 	tcp->sleep_queue = NULL;
-=======
-	/* we do not need this function, we can just init in allocate_tasks */
->>>>>>> origin/Jiang-Xue
 }
 
 /**
@@ -61,9 +57,7 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
  
 static void __attribute__((unused)) idle(void)
 {
-	 enable_interrupts();//Enable interrupts here!!! This
-    // this is the first time to lauch a user task
-    // start from the svc_mode, have to enable irq here.
+	 enable_interrupts();
 	 while(1);
 }
 
@@ -82,28 +76,10 @@ static void __attribute__((unused)) idle(void)
  */
 void allocate_tasks(task_t** tasks  __attribute__((unused)), size_t num_tasks  __attribute__((unused)))
 {
-<<<<<<< HEAD
 	task_t *task_list = *tasks;
 	unsigned int i;
 	for(i = 0; i < num_tasks; i++){
 		init_task(&a_tasks[i], &system_tcb[i+1], i+1);
 	}
-=======
-    
-    
-    
-    //put the address of launch_task to the initial lr
-    
-    task_t idle_task；
-    
-    idle_task.lambda = (task_fun_t)idle;
-    idle_task.data = NULL;
-    idle_task.stack_pos = NULL;//is it okay to not assgin stack for to idle?
-    idle_task.C = 0;
-    idle_task.T = 0;
-    
-    tasks[num_tasks] = &idle_task;
-	
->>>>>>> origin/Jiang-Xue
 }
 
