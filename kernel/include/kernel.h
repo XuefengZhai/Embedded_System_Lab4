@@ -12,7 +12,11 @@
 #include <types.h>
 
 extern uint32_t global_data;
-int enter_user_mode(void);
 int valid_addr(const void* start, size_t count, uintptr_t base, uintptr_t bound);
+void irq_wrapper();
+void s_handler();
+int switchUser(unsigned int stackAddr);
+int wire_in (unsigned int* VectorTable, unsigned int MyHandler);
+
 
 #endif /* KERNEL_H */

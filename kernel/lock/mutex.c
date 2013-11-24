@@ -34,12 +34,12 @@ int mutex_create(void)
 	return 1; // fix this to return the correct value
 }
 
-int mutex_lock(int mutex  __attribute__((unused)))
+int mutex_lock(int mutex)
 {
 	return 1; // fix this to return the correct value
 }
 
-int mutex_unlock(int mutex  __attribute__((unused)))
+int mutex_unlock(int mutex)
 {
 	return 1; // fix this to return the correct value
 }

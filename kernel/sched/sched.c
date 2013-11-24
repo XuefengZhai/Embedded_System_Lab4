@@ -22,7 +22,7 @@ tcb_t system_tcb[OS_MAX_TASKS]; /*allocate memory for system TCBs */
 
 void sched_init(task_t* main_task  __attribute__((unused)))
 {
-	
+	/* we do not need this function, we can just init in allocate_tasks */
 }
 
 /**
@@ -31,7 +31,9 @@ void sched_init(task_t* main_task  __attribute__((unused)))
  
 static void __attribute__((unused)) idle(void)
 {
-	 enable_interrupts();
+	 enable_interrupts();//Enable interrupts here!!! This
+    // this is the first time to lauch a user task
+    // start from the svc_mode, have to enable irq here.
 	 while(1);
 }
 
@@ -50,6 +52,20 @@ static void __attribute__((unused)) idle(void)
  */
 void allocate_tasks(task_t** tasks  __attribute__((unused)), size_t num_tasks  __attribute__((unused)))
 {
+    
+    
+    
+    //put the address of launch_task to the initial lr
+    
+    task_t idle_task；
+    
+    idle_task.lambda = (task_fun_t)idle;
+    idle_task.data = NULL;
+    idle_task.stack_pos = NULL;//is it okay to not assgin stack for to idle?
+    idle_task.C = 0;
+    idle_task.T = 0;
+    
+    tasks[num_tasks] = &idle_task;
 	
 }
 

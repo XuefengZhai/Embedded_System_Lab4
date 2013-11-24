@@ -26,9 +26,9 @@ static __attribute__((unused)) tcb_t* cur_tcb; /* use this if needed */
  * Set the initialization thread's priority to IDLE so that anything
  * will preempt it when dispatching the first task.
  */
-void dispatch_init(tcb_t* idle __attribute__((unused)))
+void dispatch_init(tcb_t* idle)
 {
-	
+	cur_tcb = idle;
 }
 
 
@@ -53,13 +53,16 @@ void dispatch_save(void)
  */
 void dispatch_nosave(void)
 {
-
+    ctx_switch_half()
 }
 
 
 /**
  * @brief Context switch to the highest priority task that is not this task -- 
  * and save the current task but don't mark is runnable.
+ *
+ * 2 situations using this:
+ * 1.mutex requested is locked 2. the task ask to wait a device (event_wait)
  *
  * There is always an idle task to switch to.
  */
