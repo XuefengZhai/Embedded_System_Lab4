@@ -64,7 +64,7 @@ int mutex_create(void)
 	
 }
 
-int mutex_lock(int mutex  __attribute__((unused)))
+int mutex_lock(int mutex)
 {
 	tcb_t * cur_tcbget_cur_tab();
     mutex_t *mutex_tmp=&gtMutex[mutex];
@@ -127,7 +127,7 @@ int mutex_lock(int mutex  __attribute__((unused)))
     return 0;
 }
 
-int mutex_unlock(int mutex  __attribute__((unused)))
+int mutex_unlock(int mutex)
 {
     tcb_t *cur_tcb = get_cur_tcb();
     tcb_t *next_tcb;
