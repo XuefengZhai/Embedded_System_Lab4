@@ -16,7 +16,7 @@
 #include <arm/psr.h>
 #include <arm/exception.h>
 
-define MAX_INT 0xFFFFFFFF
+#define MAX_INT 0xFFFFFFFF
 
 /**
  * @brief Fake device maintainence structure.
