@@ -1,15 +1,13 @@
 /**
  * @file mutex.c
  *
- * @brief Implements mutices.
+ * @brief Implements mutex.
  *
  * @author Xuefeng Zhai xzhai@cmu.edu
  *
- *
- * @date
+ * @date    11/22/2013
  */
 
-//#define DEBUG_MUTEX
 
 #include <lock.h>
 #include <task.h>
@@ -18,16 +16,21 @@
 #include <arm/psr.h>
 #include <arm/exception.h>
 
-#define DEBUG_MUTEX //temp
+//#define DEBUG_MUTEX
+
 #ifdef DEBUG_MUTEX
 #include <exports.h> // temp
 #endif
 
 mutex_t gtMutex[OS_NUM_MUTEX];
 
+
+/*
+ * Initiate the Mutex in gtMutex
+ */
 void mutex_init()
 {
-    //Initiate everything in gtMutex
+    
     int i = 0;
     for (i = 0; i < OS_NUM_MUTEX; i++)
     {
@@ -39,30 +42,46 @@ void mutex_init()
     
 }
 
+/*
+ * Create Mutex
+ */
 int mutex_create(void)
 {
     int j;
     disable_interrupts();
     
+    /*
+     *Find available mutex
+     */
     for (j = 0; j < OS_NUM_MUTEX; j++)
     {
         if (gtMutex[j].bAvailable)
             break;
     }
     
+    /*
+     * Mark as umavailable
+     */
     if ( j!= OS_NUM_MUTEX)
     {
         gtMutex[j].bAvailable = FALSE;
         enable_interrupts();
         return j;
     }
+    
+    /*
+     * If no available Mutex
+     */
+
     else
     {
-        enable_interrupts(); //No available mutex
+        enable_interrupts();
         return -ENOMEM;
     }
 	
 }
+
+
 
 int mutex_lock(int mutex)
 {
@@ -91,7 +110,10 @@ int mutex_lock(int mutex)
         return -EDEADLOCK;
     }
     
-    else //add to sleep queue
+    /*
+     * Add to sleep queue
+     */
+    else
     {
         if (mutex_tmp->block)
         {
