@@ -43,13 +43,11 @@ void dispatch_init(tcb_t* idle)
  */
 void dispatch_save(void)
 {
-	disable_interrupts();
 	tcb_t *tmp = cur_tcb;
 	tcb_t *rm = runqueue_remove(highest_prio());
 	runqueue_add(cur_tcb,cur_tcb->native_prio);
 	cir_tcb = rm;
 	ctx_switch_full(&(rm->context),&(tmp->context));
-	enable_interrupts();
 }
 
 /**
@@ -60,11 +58,9 @@ void dispatch_save(void)
  */
 void dispatch_nosave(void)
 {
-	disable_interrupts();
 	tcb_t* rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
 	ctx_switch_half(&(rm->context));
-	enable_interrupts();
 }
 
 
@@ -76,12 +72,10 @@ void dispatch_nosave(void)
  */
 void dispatch_sleep(void)
 {
-	diable_interrupts();
 	tcb_t *tmp = cur_tcb;
 	tcb_t *rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
 	ctx_switch_full(&(rm->context),&(tmp->context));
-	enable_interrupts();
 }
 
 /**
