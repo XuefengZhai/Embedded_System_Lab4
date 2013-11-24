@@ -33,8 +33,7 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     int i = 0;
     int j = 0;
     for(i = 0; i < num_tasks; i++){
-        if((*(tasks[i]).C > *(tasks[i]).T) || (*(tasks[i]).C < 0)
-           || (*(tasks[i]).T < 0)){
+        if(tasks[i]->C > tasks[i]->T)){
             return 0;
         }
     }
@@ -44,7 +43,7 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     
     for(i = num_tasks; i > 0; i--){
         for(j = 0; j < i-j-1; j++){
-            if((*(tasks[j]).T)>(*(tasks[j+1]).T)){
+            if((tasks[j]->T)>(tasks[j+1]->T)){
                 tmp = tasks[j];
                 tasks[j] = tasks[j+1];
                 tasks[j+1] = tmp;
