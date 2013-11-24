@@ -44,10 +44,16 @@ void dispatch_init(tcb_t* idle)
 void dispatch_save(void)
 {
 	tcb_t *tmp = cur_tcb;
-	tcb_t *rm = runqueue_remove(highest_prio());
-	runqueue_add(cur_tcb,cur_tcb->native_prio);
-	cir_tcb = rm;
-	ctx_switch_full(&(rm->context),&(tmp->context));
+	if(get_cur_prio() > highest_prio()){
+		return;
+	}
+	else{
+		tcb_t *rm = runqueue_remove(highest_prio());
+		runqueue_add(cur_tcb,cur_tcb->native_prio);
+		cir_tcb = rm;
+		ctx_switch_full(&(rm->context),&(tmp->context));	
+	}
+
 }
 
 /**
