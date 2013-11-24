@@ -5,6 +5,7 @@
  * @author Kartik Subramanian <ksubrama@andrew.cmu.edu>
  * @date 2008-10-31
  */
+#include <bits/swi.h>
 
 #include <asm.h>
 
