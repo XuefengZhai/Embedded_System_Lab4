@@ -15,5 +15,5 @@ FUNC(_start)
     ldr	r0, [sp]	@load argc in r0
 	add	r1, sp, #4	@load argv address in r1
 	bl	main		@call main
-loop:
-    b   loop
+loop_crt:
+    b   loop_crt
