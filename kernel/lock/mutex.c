@@ -35,7 +35,8 @@ void mutex_init()
     for (i = 0; i < OS_NUM_MUTEX; i++)
     {
         gtMutex[i].bAvailable = TRUE;
-        gtMutex[i].pHolding_Tcb = NULL;
+        gtMutex[i].pHold
+        ing_Tcb = NULL;
         gtMutex[i].bLock = FALSE;
         gtMutex[i].pSleep_queue = NULL;
     }
@@ -126,7 +127,7 @@ int mutex_lock(int mutex)
      */
     else
     {
-        if (mutex_tmp->block)
+        if (mutex_tmp->bLock)
         {
             tcb_t *sleep_tcb;
             tcb_t *tmp_tcb = NULL;
@@ -159,7 +160,7 @@ int mutex_lock(int mutex)
         }
     }
     
-    mutex_tmp->block = TRUE;
+    mutex_tmp->bLock = TRUE;
     mutex_tmp->pHolding_Tcb = cur_tcb;
     enable_interrupts();
     
