@@ -85,7 +85,7 @@ int task_create(task_t* tasks, size_t num_tasks)
     
     allocate_tasks(array_of_pointers, num_tasks);
     //sched_init();
-    dispatch_nosave();
+    dispatch_nosave();//dispatch the highest priority task
     
     return 1;/* never return */
   }
