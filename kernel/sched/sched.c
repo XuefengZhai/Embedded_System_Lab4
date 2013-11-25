@@ -34,14 +34,14 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
     context->r5 = (uint32_t)task->data;
     context->r6 = (uint32_t)task->stack_pos;
     context->sp = (void *)(tcb->kstack_high);
-	context->lr = launch_task;
+    context->lr = launch_task;
 
-	context->r7 = 0x0;
-	context->r9 = 0x0;
-	context->r10 = 0x0;
-	context->r11 = 0x0;
-	tcb->holds_lock = 0;
-	tcb->sleep_queue = NULL;
+    context->r7 = 0x0;
+    context->r9 = 0x0;
+    context->r10 = 0x0;
+    context->r11 = 0x0;
+    tcb->holds_lock = 0;
+    tcb->sleep_queue = NULL;
     
     runqueue_add(&system_tcb[prio],prio);
 }
@@ -52,8 +52,8 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
  
 static void idle(void)
 {
-	 enable_interrupts();
-	 while(1);
+    enable_interrupts();
+    while(1);
 }
 
 /**
@@ -84,10 +84,11 @@ void allocate_tasks(task_t** tasks, size_t num_tasks)
     init_task(&idle_task, &system_tcb[IDLE_PRIO], IDLE_PRIO);
     
     /* make user tasks into tcb and make them runnable*/
-	unsigned int i;
-	for(i = 0; i < num_tasks; i++){
-		init_task(tasks[i], &system_tcb[i+1], i+1);
-	}
+    unsigned int i;
+    while(i < num_tasks){
+    	init_task(tasks[i], &system_tcb[i+1], i+1);
+    	i++;
+    }
     
     
 }
