@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4/tasks/libc/swi/mutex_lock.o:  \
- /home/parallels/Desktop/lab4/tasks/libc/swi/mutex_lock.S \
-  /home/parallels/Desktop/lab4/tasks/libc/include/bits/swi.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/asm.h
+/home/parallels/Desktop/lab4_latest/tasks/libc/swi/mutex_lock.o:  \
+ /home/parallels/Desktop/lab4_latest/tasks/libc/swi/mutex_lock.S \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/swi.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/asm.h
 
-/home/parallels/Desktop/lab4/tasks/libc/include/bits/swi.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/swi.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/asm.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/asm.h:

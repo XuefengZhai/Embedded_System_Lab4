@@ -12,7 +12,7 @@
 #include <kernel.h>
 #include <config.h>
 #include "sched_i.h"
-
+#include <exports.h>
 #include <arm/reg.h>
 #include <arm/psr.h>
 #include <arm/exception.h>
@@ -26,6 +26,9 @@ void sched_init(task_t* main_task __attribute__((unused)))
 
 void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
 {
+    printf("C_init_task: %d \r\n", (int)task->C);
+    printf("T_init_task: %d \r\n", (int)task->T);
+
     sched_context_t *context = &(tcb->context);
     tcb->native_prio = prio;
     tcb->cur_prio = prio;
@@ -52,6 +55,7 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
  
 static void idle(void)
 {
+    printf("d");
     enable_interrupts();
     while(1);
 }
@@ -71,11 +75,14 @@ static void idle(void)
  */
 void allocate_tasks(task_t** tasks, size_t num_tasks)
 {
+    task_t* t_list = *tasks;
     /* create an idle task*/
+
     task_t idle_task;
     
     idle_task.lambda = (task_fun_t)idle;
     idle_task.data = NULL;
+    /* give svc stack to idle using as usr stack*/
     idle_task.stack_pos = system_tcb[IDLE_PRIO].kstack_high;
     idle_task.C = 0;
     idle_task.T = 0;
@@ -86,7 +93,7 @@ void allocate_tasks(task_t** tasks, size_t num_tasks)
     /* make user tasks into tcb and make them runnable*/
     unsigned int i = 0;
     while(i < num_tasks){
-    	init_task(tasks[i], &system_tcb[i+1], i+1);
+    	init_task(t_list+i, &system_tcb[i+1], i+1);
     	i++;
     }
     

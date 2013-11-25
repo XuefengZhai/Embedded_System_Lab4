@@ -1,29 +1,29 @@
-/home/parallels/Desktop/lab4/kernel/lock/mutex.o:  \
- /home/parallels/Desktop/lab4/kernel/lock/mutex.c \
-  /home/parallels/Desktop/lab4/kernel/include/lock.h \
-  /home/parallels/Desktop/lab4/kernel/include/types.h \
-  /home/parallels/Desktop/lab4/kernel/include/task.h \
-  /home/parallels/Desktop/lab4/kernel/include/config.h \
-  /home/parallels/Desktop/lab4/kernel/include/sched.h \
-  /home/parallels/Desktop/lab4/kernel/include/bits/errno.h \
-  /home/parallels/Desktop/lab4/kernel/include/arm/psr.h \
-  /home/parallels/Desktop/lab4/kernel/include/inline.h \
-  /home/parallels/Desktop/lab4/kernel/include/arm/exception.h
+/home/parallels/Desktop/lab4_latest/kernel/lock/mutex.o:  \
+ /home/parallels/Desktop/lab4_latest/kernel/lock/mutex.c \
+  /home/parallels/Desktop/lab4_latest/kernel/include/lock.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/types.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/task.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/config.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/sched.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/bits/errno.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/arm/psr.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/inline.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/arm/exception.h
 
-/home/parallels/Desktop/lab4/kernel/include/lock.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/lock.h:
 
-/home/parallels/Desktop/lab4/kernel/include/types.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/types.h:
 
-/home/parallels/Desktop/lab4/kernel/include/task.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/task.h:
 
-/home/parallels/Desktop/lab4/kernel/include/config.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/config.h:
 
-/home/parallels/Desktop/lab4/kernel/include/sched.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/sched.h:
 
-/home/parallels/Desktop/lab4/kernel/include/bits/errno.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/bits/errno.h:
 
-/home/parallels/Desktop/lab4/kernel/include/arm/psr.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/arm/psr.h:
 
-/home/parallels/Desktop/lab4/kernel/include/inline.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/inline.h:
 
-/home/parallels/Desktop/lab4/kernel/include/arm/exception.h:
+/home/parallels/Desktop/lab4_latest/kernel/include/arm/exception.h:

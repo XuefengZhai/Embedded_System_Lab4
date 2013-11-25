@@ -7,19 +7,22 @@
 
 	.global	s_handler
 s_handler:
-
-    sub sp, sp, #4 @leave space for spsr
-    stmfd sp!, {r1, ip}
-    mrs	r1, spsr	@get SPSR into registers
-	str	r1, [sp, #8]	@store SPSR above registers
-	mrs ip, cpsr
-	mov r1, #0x00000080 @enable irq
-	bic ip, r1
-	mov r1, #0x00000040 @disable frq
-	orr ip, r1
-	msr cpsr, ip
-	ldmfd sp!, {r1, ip}
+	@keep irq diabled
+        sub sp, sp, #4 @leave space for spsr
+   	@stmfd sp!, {r1}
+   	@mrs	r1, spsr	@get SPSR into registers
+	@sub sp, sp, #4
+	@str	r1, [sp]	@store SPSR above registers
+	@mrs ip, cpsr
+	@mov r1, #0x00000080 @enable irq
+	@bic ip, r1
+	@mov r1, #0x00000040 @disable frq
+	@orr ip, r1
+	@msr cpsr, ip
+	@ldmfd sp!, {r1}
 	stmfd sp!, {r0-r12, lr}	@store user's registers
+	mrs ip, spsr
+	str ip, [sp,#56]
 	ldr ip, =global_data
 	ldr r8, [ip] @set up r8 correctly
 	mov	r1, sp		@pointer to parameters on stack

@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4/tasks/libc/swi/event_wait.o:  \
- /home/parallels/Desktop/lab4/tasks/libc/swi/event_wait.S \
-  /home/parallels/Desktop/lab4/tasks/libc/include/bits/swi.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/asm.h
+/home/parallels/Desktop/lab4_latest/tasks/libc/swi/event_wait.o:  \
+ /home/parallels/Desktop/lab4_latest/tasks/libc/swi/event_wait.S \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/swi.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/asm.h
 
-/home/parallels/Desktop/lab4/tasks/libc/include/bits/swi.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/swi.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/asm.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/asm.h:

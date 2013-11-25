@@ -8,7 +8,7 @@
 
 #include <types.h>
 #include <assert.h>
-
+#include <exports.h>
 #include <task.h>
 #include <sched.h>
 #include <device.h>
@@ -64,7 +64,7 @@ void dev_init(void)
  *
  * @param dev  Device number.
  */
-void dev_wait(unsigned int dev __attribute__((unused)))
+void dev_wait(unsigned int dev)
 {
     disable_interrupts();
     tcb_t* cur_tcb = get_cur_tcb();
@@ -83,7 +83,7 @@ void dev_wait(unsigned int dev __attribute__((unused)))
  * interrupt corresponded to the interrupt frequency of a device, this 
  * function should ensure that the task is made ready to run 
  */
-void dev_update(unsigned long millis __attribute__((unused)))
+void dev_update(unsigned long millis)
 {
 	int i = 0;
 	unsigned long max = MAX_INT;

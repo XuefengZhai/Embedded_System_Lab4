@@ -1,23 +1,23 @@
-/home/parallels/Desktop/lab4/tasks/dagger/dagger.o:  \
- /home/parallels/Desktop/lab4/tasks/dagger/dagger.c \
-  /home/parallels/Desktop/lab4/tasks/libc/include/stdio.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/stdarg.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/sys/types.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/bits/types.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/task.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/unistd.h \
-  /home/parallels/Desktop/lab4/tasks/libc/include/bits/fileno.h
+/home/parallels/Desktop/lab4_latest/tasks/dagger/dagger.o:  \
+ /home/parallels/Desktop/lab4_latest/tasks/dagger/dagger.c \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/stdio.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/stdarg.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/sys/types.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/types.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/task.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/unistd.h \
+  /home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/fileno.h
 
-/home/parallels/Desktop/lab4/tasks/libc/include/stdio.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/stdio.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/stdarg.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/stdarg.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/sys/types.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/sys/types.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/bits/types.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/types.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/task.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/task.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/unistd.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/unistd.h:
 
-/home/parallels/Desktop/lab4/tasks/libc/include/bits/fileno.h:
+/home/parallels/Desktop/lab4_latest/tasks/libc/include/bits/fileno.h:
