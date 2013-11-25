@@ -211,8 +211,8 @@ int mutex_unlock(int mutex)
     else
     {
         
-        mut->bLock = FALSE;
-        mut->pHolding_Tcb = NULL;
+        mutex_tmp->bLock = FALSE;
+        mutex_tmp->pHolding_Tcb = NULL;
         
         tcb_t *next_tcb;
         
