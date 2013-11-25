@@ -20,7 +20,7 @@
 
 tcb_t system_tcb[OS_MAX_TASKS]; /*allocate memory for system TCBs */
 
-void sched_init(task_t* main_task  __attribute__((unused)))
+void sched_init(task_t* main_task)
 {
 	main_task->lambda = (task_fun_t)idle;
 	main_task->data = NULL;
