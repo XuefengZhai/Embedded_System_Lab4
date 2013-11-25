@@ -1,0 +1,23 @@
+/home/parallels/Desktop/lab4/kernel/arm/c_swi_handler.o:  \
+ /home/parallels/Desktop/lab4/kernel/arm/c_swi_handler.c \
+  /home/parallels/Desktop/lab4/kernel/include/task.h \
+  /home/parallels/Desktop/lab4/kernel/include/types.h \
+  /home/parallels/Desktop/lab4/kernel/include/config.h \
+  /home/parallels/Desktop/lab4/kernel/include/bits/swi.h \
+  /home/parallels/Desktop/lab4/kernel/include/kernel.h \
+  /home/parallels/Desktop/lab4/kernel/include/swi_handler.h \
+  /home/parallels/Desktop/lab4/kernel/include/constant.h
+
+/home/parallels/Desktop/lab4/kernel/include/task.h:
+
+/home/parallels/Desktop/lab4/kernel/include/types.h:
+
+/home/parallels/Desktop/lab4/kernel/include/config.h:
+
+/home/parallels/Desktop/lab4/kernel/include/bits/swi.h:
+
+/home/parallels/Desktop/lab4/kernel/include/kernel.h:
+
+/home/parallels/Desktop/lab4/kernel/include/swi_handler.h:
+
+/home/parallels/Desktop/lab4/kernel/include/constant.h:

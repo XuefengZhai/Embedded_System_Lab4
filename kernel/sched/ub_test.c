@@ -27,8 +27,33 @@
  * @return 0  The test failed.
  * @return 1  Test succeeded.  The tasks are now in order.
  */
-int assign_schedule(task_t** tasks  __attribute__((unused)), size_t num_tasks  __attribute__((unused)))
+int assign_schedule(task_t** tasks, size_t num_tasks)
 {
+   
+    unsigned int k = 0; 
+    for(k = 0; k < num_tasks; k++){
+        if(tasks[k]->C > tasks[k]->T){
+            return 0;
+        }
+    }
+
+    task_t* tmp = NULL;
+    int i = 0;
+    int j = 0;
+    //sorted here!!! can we just sort the array of pointers?
+    
+    for(i = (int)num_tasks; i > 0; i--){
+        for(j = 0; j < i-j-1; j++){
+            if((tasks[j]->T)>(tasks[j+1]->T)){
+                tmp = tasks[j];
+                tasks[j] = tasks[j+1];
+                tasks[j+1] = tmp;
+            }
+            
+        }
+    }
+    
+    
 
 	return 1; // fix this; dummy return to prevent compiler warnings	
 }

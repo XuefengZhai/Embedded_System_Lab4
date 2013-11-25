@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4/kernel/sched/ctx_switch_asm.o:  \
+ /home/parallels/Desktop/lab4/kernel/sched/ctx_switch_asm.S \
+  /home/parallels/Desktop/lab4/kernel/include/asm.h \
+  /home/parallels/Desktop/lab4/kernel/include/arm/psr.h
+
+/home/parallels/Desktop/lab4/kernel/include/asm.h:
+
+/home/parallels/Desktop/lab4/kernel/include/arm/psr.h:

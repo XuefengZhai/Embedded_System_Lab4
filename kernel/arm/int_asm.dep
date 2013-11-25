@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4/kernel/arm/int_asm.o:  \
+ /home/parallels/Desktop/lab4/kernel/arm/int_asm.S \
+  /home/parallels/Desktop/lab4/kernel/include/asm.h \
+  /home/parallels/Desktop/lab4/kernel/include/arm/psr.h
+
+/home/parallels/Desktop/lab4/kernel/include/asm.h:
+
+/home/parallels/Desktop/lab4/kernel/include/arm/psr.h:

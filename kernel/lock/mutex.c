@@ -1,15 +1,13 @@
 /**
  * @file mutex.c
  *
- * @brief Implements mutices.
+ * @brief Implements mutex.
  *
  * @author Xuefeng Zhai xzhai@cmu.edu
  *
- *
- * @date
+ * @date    11/22/2013
  */
 
-//#define DEBUG_MUTEX
 
 #include <lock.h>
 #include <task.h>
@@ -18,16 +16,21 @@
 #include <arm/psr.h>
 #include <arm/exception.h>
 
-#define DEBUG_MUTEX //temp
+//#define DEBUG_MUTEX
+
 #ifdef DEBUG_MUTEX
 #include <exports.h> // temp
 #endif
 
 mutex_t gtMutex[OS_NUM_MUTEX];
 
+
+/*
+ * Initiate the Mutex in gtMutex
+ */
 void mutex_init()
 {
-    //Initiate everything in gtMutex
+    
     int i = 0;
     for (i = 0; i < OS_NUM_MUTEX; i++)
     {
@@ -39,76 +42,112 @@ void mutex_init()
     
 }
 
+/*
+ * Create Mutex
+ */
 int mutex_create(void)
 {
     int j;
     disable_interrupts();
     
+    /*
+     *Find available mutex
+     */
     for (j = 0; j < OS_NUM_MUTEX; j++)
     {
         if (gtMutex[j].bAvailable)
             break;
     }
     
+    /*
+     * Mark as umavailable
+     */
     if ( j!= OS_NUM_MUTEX)
     {
         gtMutex[j].bAvailable = FALSE;
         enable_interrupts();
         return j;
     }
+    
+    /*
+     * If no available Mutex
+     */
+
     else
     {
-        enable_interrupts(); //No available mutex
+        enable_interrupts();
         return -ENOMEM;
     }
 	
 }
 
-int mutex_lock(int mutex  __attribute__((unused)))
+
+/*
+ *Implement mutex lock
+ */
+int mutex_lock(int mutex)
 {
-	tcb_t * cur_tcbget_cur_tab();
-    mutex_t *mutex_tmp=&gtMutex[mutex];
+	tcb_t * cur_tcb = get_cur_tcb();
+    mutex_t *mutex_tmp = &gtMutex[mutex];
     
     disable_interrupts();
     
     
+    /*
+     * If mutex number is not valid
+     */
     if (mutex < 0 || mutex >= OS_NUM_MUTEX)
     {
         enable_interrupts();
         return -EINVAL;
     }
     
-    
+    /*
+     * If mutex is not created
+     */
     else if(mutex_tmp->bAvailable)
     {
         enable_interrupts();
         return -EINVAL;
     }
     
+    /*
+     * If the task is already using the mutex
+     */
     else if(mutex_tmp->pHolding_Tcb == cur_tcb)
     {
         enable_interrupts();
         return -EDEADLOCK;
     }
     
-    else //add to sleep queue
+    /*
+     * Lock the mutex
+     * Add task to sleep queue if mutex is using
+     */
+    else
     {
-        if (mutex_tmp->block)
+        if (mutex_tmp->bLock)
         {
             tcb_t *sleep_tcb;
             tcb_t *tmp_tcb = NULL;
-        
+            
+            /*
+             *If the sleep_queue is empty
+             */
             if (mutex_tmp->pSleep_queue == NULL)
             {
                 mutex_tmp->pSleep_queue = cur_tcb;
                 cur_tcb->sleep_queue = NULL;
             }
+            
+            /*
+             *If the sleep_queue is not empty
+             */
             else
             {
                 sleep_tcb = mutex_tmp->pSleep_queue;
-                while(sleep_tcb != NULL)
+                while(sleep_tcb->sleep_queue != NULL)
                 {
-                tmp_tcb = sleep_tcb;
                 sleep_tcb = sleep_tcb->sleep_queue;
                 }
             tmp_tcb->sleep_queue = cur_tcb;
@@ -120,21 +159,27 @@ int mutex_lock(int mutex  __attribute__((unused)))
         }
     }
     
-    mutex_tmp->block = TRUE;
+    mutex_tmp->bLock = TRUE;
     mutex_tmp->pHolding_Tcb = cur_tcb;
     enable_interrupts();
     
     return 0;
 }
 
-int mutex_unlock(int mutex  __attribute__((unused)))
+/*
+ *Implement mutex unlock
+ */
+
+int mutex_unlock(int mutex)
 {
     tcb_t *cur_tcb = get_cur_tcb();
-    tcb_t *next_tcb;
     mutex_t *mutex_tmp = &gtMutex[mutex];
 
     disable_interrupts();
     
+    /*
+     * If mutex number is not valid
+     */
     if (mutex < 0 || mutex >= OS_NUM_MUTEX)
     {
         enable_interrupts();
@@ -142,29 +187,43 @@ int mutex_unlock(int mutex  __attribute__((unused)))
     }
     
     
+    /*
+     * If mutex is not created
+     */
     else if(mutex_tmp->bAvailable)
     {
         enable_interrupts();
         return -EINVAL;
     }
     
-    
-    else if (cur_tcb != mutex_tmp.pHolding_Tcb)
+    /*
+     * If the task is already using the mutex
+     */
+    else if (cur_tcb != mutex_tmp->pHolding_Tcb)
     {
         enable_interrupts();
         return -EPERM;
     }
     
+    /*
+     * Unlock the mutex
+     */
     else
     {
         
-        mut->bLock = FALSE;
-        mut->pHolding_Tcb = NULL;
+        mutex_tmp->bLock = FALSE;
+        mutex_tmp->pHolding_Tcb = NULL;
         
-        if(mut->pSleep_queue != NULL)
+        tcb_t *next_tcb;
+        
+        /*
+         *If the sleep_queue is not empty
+         *run queue add for the next tcb
+         */
+        if(mutex_tmp->pSleep_queue != NULL)
         {
-            next_tcb = mut->pSleep_queue;
-            mut->pSleep_queue = next_tcb->sleep_queue;
+            next_tcb  = mutex_tmp->pSleep_queue;
+            mutex_tmp->pSleep_queue = next_tcb->sleep_queue;
             next_tcb->sleep_queue = NULL;
             runqueue_add(next_tcb, next_tcb->cur_prio);
         }

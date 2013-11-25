@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4/kernel/math.o:  \
+ /home/parallels/Desktop/lab4/kernel/math.c \
+  /home/parallels/Desktop/lab4/kernel/include/types.h \
+  /home/parallels/Desktop/lab4/kernel/include/math.h
+
+/home/parallels/Desktop/lab4/kernel/include/types.h:
+
+/home/parallels/Desktop/lab4/kernel/include/math.h:

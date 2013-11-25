@@ -14,6 +14,8 @@
 
 void sched_init(task_t* main_task);
 
+int check_validation(task_t** tasks, size_t num_tasks);
+
 /* Scheduler invocations */
 void dispatch_save(void);
 void dispatch_nosave(void);

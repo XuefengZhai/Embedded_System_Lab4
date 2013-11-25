@@ -122,9 +122,9 @@ uint8_t highest_prio(void)
 {
 	uint8_t group_num, group_pos, prio;
 	//find group_num
-	group_num = prio_umap_table[group_run_bits];
+	group_num = prio_unmap_table[group_run_bits];
 	//find position in the group
-	group_pos = prio_umap_table[run_bits[group_num]];
+	group_pos = prio_unmap_table[run_bits[group_num]];
 
 	//calculate the priority
 	prio = (group_num << SHIFT) + group_pos;

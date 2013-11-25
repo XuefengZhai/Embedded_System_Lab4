@@ -1,0 +1,17 @@
+/home/parallels/Desktop/lab4/tasks/libc/raise.o:  \
+ /home/parallels/Desktop/lab4/tasks/libc/raise.c \
+  /home/parallels/Desktop/lab4/tasks/libc/include/stdio.h \
+  /home/parallels/Desktop/lab4/tasks/libc/include/stdarg.h \
+  /home/parallels/Desktop/lab4/tasks/libc/include/sys/types.h \
+  /home/parallels/Desktop/lab4/tasks/libc/include/bits/types.h \
+  /home/parallels/Desktop/lab4/tasks/libc/include/stdlib.h
+
+/home/parallels/Desktop/lab4/tasks/libc/include/stdio.h:
+
+/home/parallels/Desktop/lab4/tasks/libc/include/stdarg.h:
+
+/home/parallels/Desktop/lab4/tasks/libc/include/sys/types.h:
+
+/home/parallels/Desktop/lab4/tasks/libc/include/bits/types.h:
+
+/home/parallels/Desktop/lab4/tasks/libc/include/stdlib.h:
