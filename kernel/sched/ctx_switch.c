@@ -29,7 +29,7 @@ static tcb_t* cur_tcb; /* use this if needed */
 void dispatch_init(tcb_t* idle)
 {
 	cur_tcb = idle;
-	cur_tcb->cur_prio = UDLE_PRIO;	
+	cur_tcb->cur_prio = IDLE_PRIO;	
 }
 
 
