@@ -28,10 +28,12 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
 {
     printf("C_init_task: %d \r\n", (int)task->C);
     printf("T_init_task: %d \r\n", (int)task->T);
-
+    printf("priority: %d \r\n", (int)prio);
     sched_context_t *context = &(tcb->context);
     tcb->native_prio = prio;
     tcb->cur_prio = prio;
+    printf("priority_dupl_nat: %d \r\n",(int)(tcb->native_prio));
+    printf("priority_dupl_cur: %d \r\n",(int)(tcb->cur_prio));
     //set up context
     context->r4 = (uint32_t)task->lambda;
     context->r5 = (uint32_t)task->data;
@@ -55,7 +57,6 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
  
 static void idle(void)
 {
-    printf("d");
     enable_interrupts();
     while(1);
 }

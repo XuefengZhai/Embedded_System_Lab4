@@ -8,7 +8,7 @@
 
 #include <types.h>
 #include <assert.h>
-
+#include <exports.h>
 #include <kernel.h>
 #include <sched.h>
 #include "sched_i.h"
@@ -79,6 +79,7 @@ void runqueue_init(void)
  */
 void runqueue_add(tcb_t* tcb , uint8_t prio)
 {
+	printf("runqueue_add: %d \r\n",prio);
 	//add task to run list
 	run_list[prio] = tcb;
 	//mask the group_run_bits (eg. n/x == n>>log(x))
@@ -98,6 +99,7 @@ void runqueue_add(tcb_t* tcb , uint8_t prio)
  */
 tcb_t* runqueue_remove(uint8_t prio)
 {
+	printf("runqueue_remove: %d \r\n",prio);
 	tcb_t *removed_tcb = NULL;
 	//remove from run_list
 	removed_tcb = run_list[prio];
@@ -125,7 +127,10 @@ uint8_t highest_prio(void)
 	group_num = prio_unmap_table[group_run_bits];
 	//find position in the group
 	group_pos = prio_unmap_table[run_bits[group_num]];
-
+	
+	if(group_run_bits == 0){
+		return IDLE_PRIO;
+	}
 	//calculate the priority
 	prio = (group_num << SHIFT) + group_pos;
 

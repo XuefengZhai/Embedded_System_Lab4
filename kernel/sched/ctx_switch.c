@@ -43,9 +43,7 @@ void dispatch_init(tcb_t* idle __attribute__((unused)))
 void dispatch_save(void)
 {
 	tcb_t *tmp = cur_tcb;
-	if(get_cur_prio() > highest_prio()){
-		printf("current priority: %d \r\n",(int)get_cur_prio());
-                printf("highest priority: %d \r\n",(int)highest_prio());
+	if(get_cur_prio() < highest_prio()){
 		return;
 	}
 	else{
