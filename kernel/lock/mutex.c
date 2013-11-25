@@ -87,7 +87,7 @@ int mutex_create(void)
  */
 int mutex_lock(int mutex)
 {
-	tcb_t * cur_tcb = get_cur_tab();
+	tcb_t * cur_tcb = get_cur_tcb();
     mutex_t *mutex_tmp = &gtMutex[mutex];
     
     disable_interrupts();
