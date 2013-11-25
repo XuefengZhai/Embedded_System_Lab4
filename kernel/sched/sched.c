@@ -29,7 +29,7 @@ void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
     sched_context_t *context = &(tcb->context);
     tcb->native_prio = prio;
     tcb->cur_prio = prio;
-        //set up context
+    //set up context
     context->r4 = (uint32_t)task->lambda;
     context->r5 = (uint32_t)task->data;
     context->r6 = (uint32_t)task->stack_pos;
