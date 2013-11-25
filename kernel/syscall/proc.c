@@ -29,31 +29,31 @@
 int check_validation(task_t** tasklist, size_t num_of_tasks){
     /* check number of tasks */
     if((num_of_tasks > OS_MAX_TASKS - 2) || (num_of_tasks == 0)){
-        return EINVAL;
+        return -EINVAL;
     }
 
     unsigned int i = 0;
     for(i = 0; i < num_of_tasks; i++){
         if(valid_addr((void *)(tasklist[i]->lambda), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task function out of valid address \r\n");
-            return EFAULT;
+            return -EFAULT;
         }
         
         //check if the stack point are duplicated
         
         if(valid_addr((tasklist[i]->stack_pos), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task stack out of valid address \r\n");
-            return EFAULT;
+            return -EFAULT;
         }
         if(valid_addr((tasklist[i]->data), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("data out of valid address \r\n");
-            return EFAULT;
+            return -EFAULT;
         }
         
         /* sorted when returned from assign_schedule */
         if(assign_schedule(tasklist, num_of_tasks) == 0){
             printf("tasks not schedulable \r\n");
-            return ESCHED;
+            return -ESCHED;
         }
         
         
@@ -98,7 +98,7 @@ int event_wait(unsigned int dev)
 {
     if(dev >= NUM_DEVICES){
         printf("device number invalid \r\n");
-        return EINVAL;
+        return -EINVAL;
     }
     dev_wait(dev);
 
