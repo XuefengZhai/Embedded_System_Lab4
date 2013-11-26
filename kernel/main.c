@@ -19,7 +19,7 @@
 #include <sched.h>
 #include <assert.h>
 #include <device.h>
-
+#include <lock.h>
 uint32_t global_data;
 volatile unsigned int ptr;
 unsigned int SWIorigInstrFirst;
@@ -79,6 +79,7 @@ int kmain(int argc, char** argv, uint32_t table)
 	uint32_t oscr_content = 0x0;
 	reg_write(OSTMR_OSCR_ADDR, oscr_content);
 	
+	mutex_init();
 	/* go to user space */
 	switchUser((unsigned int)(user_sp-argc-1));
 	

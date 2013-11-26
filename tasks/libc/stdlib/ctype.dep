@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_latest/tasks/libc/stdlib/ctype.o:  \
- /home/parallels/Desktop/lab4_latest/tasks/libc/stdlib/ctype.c \
-  /home/parallels/Desktop/lab4_latest/tasks/libc/include/ctype.h \
-  /home/parallels/Desktop/lab4_latest/tasks/libc/include/inline.h
+/home/parallels/Desktop/lab4_working/tasks/libc/stdlib/ctype.o:  \
+ /home/parallels/Desktop/lab4_working/tasks/libc/stdlib/ctype.c \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/ctype.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/inline.h
 
-/home/parallels/Desktop/lab4_latest/tasks/libc/include/ctype.h:
+/home/parallels/Desktop/lab4_working/tasks/libc/include/ctype.h:
 
-/home/parallels/Desktop/lab4_latest/tasks/libc/include/inline.h:
+/home/parallels/Desktop/lab4_working/tasks/libc/include/inline.h:

@@ -1,26 +1,29 @@
-/home/parallels/Desktop/lab4_latest/kernel/syscall/time.o:  \
- /home/parallels/Desktop/lab4_latest/kernel/syscall/time.c \
-  /home/parallels/Desktop/lab4_latest/kernel/include/types.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/config.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/bits/errno.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/arm/timer.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/syscall.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/task.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/arm/exception.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/inline.h
+/home/parallels/Desktop/lab4_working/kernel/syscall/time.o:  \
+ /home/parallels/Desktop/lab4_working/kernel/syscall/time.c \
+  /home/parallels/Desktop/lab4_working/kernel/include/types.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/config.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/bits/errno.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/timer.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/syscall.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/task.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/inline.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h
 
-/home/parallels/Desktop/lab4_latest/kernel/include/types.h:
+/home/parallels/Desktop/lab4_working/kernel/include/types.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/config.h:
+/home/parallels/Desktop/lab4_working/kernel/include/config.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/bits/errno.h:
+/home/parallels/Desktop/lab4_working/kernel/include/bits/errno.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/arm/timer.h:
+/home/parallels/Desktop/lab4_working/kernel/include/arm/timer.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/syscall.h:
+/home/parallels/Desktop/lab4_working/kernel/include/syscall.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/task.h:
+/home/parallels/Desktop/lab4_working/kernel/include/task.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/arm/exception.h:
+/home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/inline.h:
+/home/parallels/Desktop/lab4_working/kernel/include/inline.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h:

@@ -1,0 +1,32 @@
+/home/parallels/Desktop/lab4_working/tasks/mutex_chaser/mutex_chaser.o:  \
+ /home/parallels/Desktop/lab4_working/tasks/mutex_chaser/mutex_chaser.c \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/unistd.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/fileno.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/task.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/lock.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/errno.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/errno.h
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/unistd.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/fileno.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/task.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/lock.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/errno.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/errno.h:

@@ -1,11 +1,11 @@
-/home/parallels/Desktop/lab4_latest/kernel/arm/psr.o:  \
- /home/parallels/Desktop/lab4_latest/kernel/arm/psr.c \
-  /home/parallels/Desktop/lab4_latest/kernel/include/types.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/arm/psr.h \
-  /home/parallels/Desktop/lab4_latest/kernel/include/inline.h
+/home/parallels/Desktop/lab4_working/kernel/arm/psr.o:  \
+ /home/parallels/Desktop/lab4_working/kernel/arm/psr.c \
+  /home/parallels/Desktop/lab4_working/kernel/include/types.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/inline.h
 
-/home/parallels/Desktop/lab4_latest/kernel/include/types.h:
+/home/parallels/Desktop/lab4_working/kernel/include/types.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/arm/psr.h:
+/home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h:
 
-/home/parallels/Desktop/lab4_latest/kernel/include/inline.h:
+/home/parallels/Desktop/lab4_working/kernel/include/inline.h:
