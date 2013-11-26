@@ -41,10 +41,17 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
             return -EFAULT;
         }
         
-        if(valid_addr((void *)(t_list+i), 0, USR_START_ADDR, USR_END_ADDR) == 0){
+/*
+        if(valid_addr((void *)(t_list+i), sizeof(task_t)*num_of_tasks, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task created out of user space \r\n");
             return -EFAULT;
         }
+ 
+	if((t_list+i)==(task_t*)0xdeadbeef)
+	{
+	            printf("task created out of user space \r\n");
+            return -EFAULT;	
+	}*/
         
         if(valid_addr(((t_list+i)->stack_pos), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task stack out of valid address \r\n");
@@ -136,4 +143,3 @@ void invalid_syscall(unsigned int call_num)
 	disable_interrupts();
 	while(1);
 }
-
