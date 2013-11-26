@@ -1,0 +1,5 @@
+/home/parallels/Desktop/lab4_working/tasks/libc/crt0.o:  \
+ /home/parallels/Desktop/lab4_working/tasks/libc/crt0.S \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h:

@@ -1,0 +1,11 @@
+/home/parallels/Desktop/lab4_working/tasks/libc/string/strncat.o:  \
+ /home/parallels/Desktop/lab4_working/tasks/libc/string/strncat.c \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/string.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/string.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h:

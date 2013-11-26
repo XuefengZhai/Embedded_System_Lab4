@@ -1,0 +1,29 @@
+/home/parallels/Desktop/lab4_working/kernel/lock/mutex.o:  \
+ /home/parallels/Desktop/lab4_working/kernel/lock/mutex.c \
+  /home/parallels/Desktop/lab4_working/kernel/include/lock.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/types.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/task.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/config.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/sched.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/bits/errno.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/inline.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h
+
+/home/parallels/Desktop/lab4_working/kernel/include/lock.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/types.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/task.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/config.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/sched.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/bits/errno.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/inline.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h:

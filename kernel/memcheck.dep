@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4_working/kernel/memcheck.o:  \
+ /home/parallels/Desktop/lab4_working/kernel/memcheck.c \
+  /home/parallels/Desktop/lab4_working/kernel/include/kernel.h \
+  /home/parallels/Desktop/lab4_working/kernel/include/types.h
+
+/home/parallels/Desktop/lab4_working/kernel/include/kernel.h:
+
+/home/parallels/Desktop/lab4_working/kernel/include/types.h:

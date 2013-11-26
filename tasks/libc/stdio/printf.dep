@@ -1,0 +1,23 @@
+/home/parallels/Desktop/lab4_working/tasks/libc/stdio/printf.o:  \
+ /home/parallels/Desktop/lab4_working/tasks/libc/stdio/printf.c \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/unistd.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/fileno.h \
+  /home/parallels/Desktop/lab4_working/tasks/libc/stdio/doprnt.h
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/unistd.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/fileno.h:
+
+/home/parallels/Desktop/lab4_working/tasks/libc/stdio/doprnt.h:
