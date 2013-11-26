@@ -27,11 +27,7 @@
 
 int check_validation(task_t** tasklist, size_t num_of_tasks){
     /* check number of tasks */
-    task_t * t_list = *tasklist;	
-    printf("C1k: %d \r\n",(int) t_list->C);
-    printf("T1k: %d \r\n",(int) t_list->T);
-    printf("C2k: %d \r\n",(int) (t_list+1)->C);
-    printf("T2k: %d \r\n",(int) (t_list+1)->T);
+    task_t * t_list = *tasklist;
     if((num_of_tasks > OS_MAX_TASKS - 2) || (num_of_tasks == 0)){
         return -EINVAL;
     }
@@ -74,7 +70,6 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
 int task_create(task_t* tasks, size_t num_tasks)
 {
     
-    printf("T2uuu: %d \r\n",(int) (tasks+1)->T);
     /* initialize the run queue, the mutex and the device */
     runqueue_init();
     mutex_init();
@@ -83,8 +78,7 @@ int task_create(task_t* tasks, size_t num_tasks)
     /*check the validation of stack_pos, data, function, num_tasks and schedubility
      * and sort the task
      */
-  
-    printf("T2UUU: %d \r\n",(int) (tasks+1)->T);
+
 
     
     int check = check_validation(&tasks, num_tasks);

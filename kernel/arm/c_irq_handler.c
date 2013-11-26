@@ -16,7 +16,7 @@
 #include <sched.h>
 void c_irq_handler(){
 	
-	
+
 	/* check the source of the interrupt*/
 	uint32_t icpr_content = reg_read(INT_ICPR_ADDR);
 	if((icpr_content & (0x1<<INT_OSTMR_0)) == 0){

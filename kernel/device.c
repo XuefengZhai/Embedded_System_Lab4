@@ -92,7 +92,6 @@ void dev_update(unsigned long millis)
                  if(devices[i].next_match == millis) {
                         while(devices[i].sleep_queue != NULL) {
                                 temp_tcb = devices[i].sleep_queue;
-                                printf("current_time: %d ms\r\n",(int)millis);
                                 runqueue_add(temp_tcb, temp_tcb->cur_prio);
                                 devices[i].sleep_queue = temp_tcb->sleep_queue;
                                 temp_tcb->sleep_queue = NULL;

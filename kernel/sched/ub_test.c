@@ -32,8 +32,6 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     task_t * t_list = *tasks;   
     unsigned int k = 0; 
     for(k = 0; k < num_tasks; k++){
-	printf("C: %d \r\n",(int)((t_list+k)->C));
-	printf("T: %d \r\n",(int)((t_list+k)->T));
         if((t_list+k)->C > (t_list+k)->T){
             return 0;
         }
@@ -51,7 +49,6 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
          }
     }
     for(i = 0; i < (int)num_tasks; i++){
-        printf("T_sort: %d \r\n", (int)((t_list+i)->T));	
     }
 
 	return 1; // fix this; dummy return to prevent compiler warnings	

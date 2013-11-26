@@ -35,10 +35,6 @@ void c_swi_handler(unsigned swi_num, unsigned *regs){
 			break;
         case CREATE_SWI:
             //create taks
-	    printf("C1_SWI:%d \r\n",(int)(((task_t*)regs[0])->C));
-	    printf("T1_SWI:%d \r\n",(int)(((task_t*)regs[0])->T));
-	    printf("C2_SWI:%d \r\n",(int)((((task_t*)regs[0])+1)->C));
-	    printf("T2_SWI:%d \r\n",(int)((((task_t*)regs[0])+1)->T));
             task_create((task_t *)regs[0], (size_t)regs[1]);
             break;
         case MUTEX_CREATE:

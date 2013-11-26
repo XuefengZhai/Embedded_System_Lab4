@@ -79,7 +79,6 @@ void runqueue_init(void)
  */
 void runqueue_add(tcb_t* tcb , uint8_t prio)
 {
-	printf("runqueue_add: %d \r\n",prio);
 	//add task to run list
 	run_list[prio] = tcb;
 	//mask the group_run_bits (eg. n/x == n>>log(x))
@@ -99,7 +98,6 @@ void runqueue_add(tcb_t* tcb , uint8_t prio)
  */
 tcb_t* runqueue_remove(uint8_t prio)
 {
-	printf("runqueue_remove: %d \r\n",prio);
 	tcb_t *removed_tcb = NULL;
 	//remove from run_list
 	removed_tcb = run_list[prio];

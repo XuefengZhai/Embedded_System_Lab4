@@ -19,6 +19,7 @@
 #include <arm/physmem.h>
 
 tcb_t system_tcb[OS_MAX_TASKS]; /*allocate memory for system TCBs */
+static void idle(void);
 
 void sched_init(task_t* main_task __attribute__((unused)))
 {
@@ -26,20 +27,20 @@ void sched_init(task_t* main_task __attribute__((unused)))
 
 void init_task(task_t *task, tcb_t *tcb,uint8_t prio)
 {
-    printf("C_init_task: %d \r\n", (int)task->C);
-    printf("T_init_task: %d \r\n", (int)task->T);
-    printf("priority: %d \r\n", (int)prio);
+
     sched_context_t *context = &(tcb->context);
     tcb->native_prio = prio;
     tcb->cur_prio = prio;
-    printf("priority_dupl_nat: %d \r\n",(int)(tcb->native_prio));
-    printf("priority_dupl_cur: %d \r\n",(int)(tcb->cur_prio));
     //set up context
     context->r4 = (uint32_t)task->lambda;
     context->r5 = (uint32_t)task->data;
     context->r6 = (uint32_t)task->stack_pos;
+    //printf("usr_st: %x \r\n", (unsigned int)(context->r6));
     context->sp = (void *)(tcb->kstack_high);
-    context->lr = launch_task;
+    if(prio != IDLE_PRIO)
+    	context->lr = launch_task;
+    else
+	context->lr = &(idle);
 
     context->r7 = 0x0;
     context->r9 = 0x0;

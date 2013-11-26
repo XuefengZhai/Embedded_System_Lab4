@@ -43,15 +43,14 @@ void dispatch_init(tcb_t* idle __attribute__((unused)))
 void dispatch_save(void)
 {
 	tcb_t *tmp = cur_tcb;
-	if(get_cur_prio() < highest_prio()){
+	if(get_cur_prio() <= highest_prio()){
 		return;
 	}
 	else{
-		printf("dispatch_save start!!!");
 		tcb_t *rm = runqueue_remove(highest_prio());
 		runqueue_add(cur_tcb,cur_tcb->native_prio);
-		cur_tcb = rm;
-		ctx_switch_full(&(rm->context),&(tmp->context));	
+		cur_tcb = rm; 
+        ctx_switch_full(&(rm->context),&(tmp->context));
 	}
 
 }
@@ -64,7 +63,6 @@ void dispatch_save(void)
  */
 void dispatch_nosave(void)
 {
-	printf("dispatch_nosave start!!!");
 	tcb_t* rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
 	ctx_switch_half(&(rm->context));
@@ -79,7 +77,6 @@ void dispatch_nosave(void)
  */
 void dispatch_sleep(void)
 {
-	printf("dispatch_sleep start!!!");
 	tcb_t *tmp = cur_tcb;
 	tcb_t *rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
