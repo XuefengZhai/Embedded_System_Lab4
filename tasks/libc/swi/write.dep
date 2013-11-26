@@ -1,8 +1,0 @@
-/home/parallels/Desktop/lab4_working/tasks/libc/swi/write.o:  \
- /home/parallels/Desktop/lab4_working/tasks/libc/swi/write.S \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/swi.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h
-
-/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/swi.h:
-
-/home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h:
