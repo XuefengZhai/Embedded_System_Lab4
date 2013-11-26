@@ -1,0 +1,8 @@
+Simple_mutex.bin
+
+## Total Size      = 0x00000430 = 1072 Bytes
+## Start Addr      = 0xA0000000
+GUM> go a3000000
+## Starting application at 0xA3000000 ...
+succeSs!
+
