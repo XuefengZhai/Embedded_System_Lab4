@@ -44,8 +44,8 @@ struct sched_context
 	uint32_t r9;
 	uint32_t r10;
 	uint32_t r11;
-	void*    sp;
-	void*    lr;
+	void*    sp;//the svc_sp, exactly the sp when the task get into ctx_switch.S
+	void*    lr;//the svc_lr, exactly the lr when the task get into ctx_switch.S
 };
 typedef volatile struct sched_context sched_context_t;
 

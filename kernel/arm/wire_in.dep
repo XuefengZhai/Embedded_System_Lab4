@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4_latest/kernel/arm/wire_in.o:  \
+ /home/parallels/Desktop/lab4_latest/kernel/arm/wire_in.c \
+  /home/parallels/Desktop/lab4_latest/kernel/include/constant.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/kmain.h
+
+/home/parallels/Desktop/lab4_latest/kernel/include/constant.h:
+
+/home/parallels/Desktop/lab4_latest/kernel/include/kmain.h:

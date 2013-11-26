@@ -18,7 +18,7 @@
 #include <exports.h>
 #endif
 
-static __attribute__((unused)) tcb_t* cur_tcb; /* use this if needed */
+static tcb_t* cur_tcb; /* use this if needed */
 
 /**
  * @brief Initialize the current TCB and priority.
@@ -28,8 +28,7 @@ static __attribute__((unused)) tcb_t* cur_tcb; /* use this if needed */
  */
 void dispatch_init(tcb_t* idle __attribute__((unused)))
 {
-	cur_tcb = idle;
-	cur_tcb->cur_prio = UDLE_PRIO;	
+    
 }
 
 
@@ -43,13 +42,41 @@ void dispatch_init(tcb_t* idle __attribute__((unused)))
  */
 void dispatch_save(void)
 {
-	disable_interrupts();
 	tcb_t *tmp = cur_tcb;
-	tcb_t *rm = runqueue_remove(highest_prio());
-	runqueue_add(cur_tcb,cur_tcb->native_prio);
-	cir_tcb = rm;
-	ctx_switch_full(&(rm->context),&(tmp->context));
-	enable_interrupts();
+	if(get_cur_prio() <= highest_prio()){
+		return;
+	}
+	else{
+	//	printf("dispatch_save start!!!");
+		tcb_t *rm = runqueue_remove(highest_prio());
+		runqueue_add(cur_tcb,cur_tcb->native_prio);
+		cur_tcb = rm; 
+		/*
+		printf("old context r4: %x \r\n",(int)((tmp->context).r4));
+		printf("old context r5: %x \r\n",(int)((tmp->context).r5));
+		printf("old context r6: %x \r\n",(int)((tmp->context).r6));
+		printf("old context r7: %x \r\n",(int)((tmp->context).r7));
+		printf("old context r8: %x \r\n",(int)((tmp->context).r8));
+		printf("old context r9: %x \r\n",(int)((tmp->context).r9));
+		printf("old context r10: %x \r\n",(int)((tmp->context).r10));
+		printf("old context r11: %x \r\n",(int)((tmp->context).r11));
+		printf("old context sp: %x \r\n",(int)((tmp->context).sp));
+		printf("old context lr: %x \r\n",(int)((tmp->context).lr));
+		printf("new context r4: %x \r\n",(int)((rm->context).r4));
+		printf("new context r5: %x \r\n",(int)((rm->context).r5));
+		printf("new context r6: %x \r\n",(int)((rm->context).r6));
+		printf("new context r7: %x \r\n",(int)((rm->context).r7));
+		printf("new context r8: %x \r\n",(int)((rm->context).r8));
+
+		printf("new context r9: %x \r\n",(int)((rm->context).r9));
+		printf("new context r10: %x \r\n",(int)((rm->context).r10));
+		printf("new context r11: %x \r\n",(int)((rm->context).r11));
+		printf("new context sp: %x \r\n",(int)((rm->context).sp));
+		printf("new context lr: %x \r\n",(int)((rm->context).lr));
+		*/
+		ctx_switch_full(&(rm->context),&(tmp->context));	
+	}
+
 }
 
 /**
@@ -60,11 +87,10 @@ void dispatch_save(void)
  */
 void dispatch_nosave(void)
 {
-	disable_interrupts();
+//	printf("dispatch_nosave start!!!");
 	tcb_t* rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
 	ctx_switch_half(&(rm->context));
-	enable_interrupts();
 }
 
 
@@ -76,12 +102,11 @@ void dispatch_nosave(void)
  */
 void dispatch_sleep(void)
 {
-	diable_interrupts();
+//	printf("dispatch_sleep start!!!");
 	tcb_t *tmp = cur_tcb;
 	tcb_t *rm = runqueue_remove(highest_prio());
 	cur_tcb = rm;
 	ctx_switch_full(&(rm->context),&(tmp->context));
-	enable_interrupts();
 }
 
 /**

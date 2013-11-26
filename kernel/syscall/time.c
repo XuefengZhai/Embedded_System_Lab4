@@ -10,11 +10,13 @@
 #include <bits/errno.h>
 #include <arm/timer.h>
 #include <syscall.h>
-
+#include <arm/exception.h>
 extern volatile unsigned long num_of_10ms;
 
 unsigned long time(){
 
+	enable_interrupts();
+	
 	unsigned long ret = num_of_10ms * 10;
 	
 	return ret;
@@ -30,7 +32,9 @@ unsigned long time(){
  * 
  */
 void sleep(unsigned long millis){
-	
+
+	enable_interrupts();
+		
 	/* calculate the expected count of 10ms */
 	unsigned long expected_num_of_10ms = num_of_10ms + millis/10;
 	

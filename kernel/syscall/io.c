@@ -15,7 +15,7 @@
 #include <syscall.h>
 #include <exports.h>
 #include <kernel.h>
-
+#include <arm/exception.h>
 #define buffersize 0x4000000
 #define heapbtm 0xa0000000
 #define freetop 0xa3efffff
@@ -43,6 +43,8 @@ ssize_t read(int fd, void *buf, size_t count)
 	 * because the first of buf[] start with buf[0].
 	 * charbuf in local copy of buf.
 	 */
+	enable_interrupts();
+	
 	int unsigned currentsp = getsp();
 	char ch;
 	ssize_t readcount = -1; 
@@ -146,6 +148,7 @@ ssize_t read(int fd, void *buf, size_t count)
 }
 
 ssize_t write(int fd, const void *buf, size_t count){
+	enable_interrupts();
 	int i;
 	char *Buf = (char *)buf;
 	/*

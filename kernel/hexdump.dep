@@ -1,0 +1,20 @@
+/home/parallels/Desktop/lab4_latest/kernel/hexdump.o:  \
+ /home/parallels/Desktop/lab4_latest/kernel/hexdump.c \
+  /home/parallels/Desktop/lab4_latest/kernel/include/ctype.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/inline.h \
+  /home/parallels/Desktop/lab4_latest/uboot/include/exports.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/types.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/stdarg.h \
+  /home/parallels/Desktop/lab4_latest/uboot/include/_exports.h
+
+/home/parallels/Desktop/lab4_latest/kernel/include/ctype.h:
+
+/home/parallels/Desktop/lab4_latest/kernel/include/inline.h:
+
+/home/parallels/Desktop/lab4_latest/uboot/include/exports.h:
+
+/home/parallels/Desktop/lab4_latest/kernel/include/types.h:
+
+/home/parallels/Desktop/lab4_latest/kernel/include/stdarg.h:
+
+/home/parallels/Desktop/lab4_latest/uboot/include/_exports.h:

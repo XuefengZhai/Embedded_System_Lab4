@@ -14,6 +14,8 @@
 
 void sched_init(task_t* main_task);
 
+int check_validation(task_t** tasks, size_t num_tasks);
+
 /* Scheduler invocations */
 void dispatch_save(void);
 void dispatch_nosave(void);
@@ -34,5 +36,7 @@ tcb_t* get_cur_tcb(void);
 void runqueue_add(tcb_t* tcb, uint8_t prio);
 tcb_t* runqueue_remove(uint8_t prio);
 uint8_t highest_prio(void);
+
+void t_swap(task_t* t1, task_t* t2);
 
 #endif /* SCHED_H */

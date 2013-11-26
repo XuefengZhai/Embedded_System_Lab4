@@ -8,7 +8,7 @@
 
 #include <types.h>
 #include <assert.h>
-
+#include <exports.h>
 #include <task.h>
 #include <sched.h>
 #include <device.h>
@@ -16,7 +16,7 @@
 #include <arm/psr.h>
 #include <arm/exception.h>
 
-define MAX_INT 0xFFFFFFFF
+#define MAX_INT 0xFFFFFFFF
 
 /**
  * @brief Fake device maintainence structure.
@@ -64,8 +64,9 @@ void dev_init(void)
  *
  * @param dev  Device number.
  */
-void dev_wait(unsigned int dev __attribute__((unused)))
+void dev_wait(unsigned int dev)
 {
+   // printf("dev_no %d \r\n",(int)dev);
     disable_interrupts();
     tcb_t* cur_tcb = get_cur_tcb();
     cur_tcb->sleep_queue = devices[dev].sleep_queue;
@@ -83,15 +84,18 @@ void dev_wait(unsigned int dev __attribute__((unused)))
  * interrupt corresponded to the interrupt frequency of a device, this 
  * function should ensure that the task is made ready to run 
  */
-void dev_update(unsigned long millis __attribute__((unused)))
+void dev_update(unsigned long millis)
 {
 	int i = 0;
 	unsigned long max = MAX_INT;
         tcb_t *temp_tcb;
         while(i < NUM_DEVICES){
                  if(devices[i].next_match == millis) {
+			//printf("device %d, n_match %d, cur_time %d ms \r\n",i,(int)(devices[i].next_match),(int)millis);
+			//printf("sleepQ: %d \r\n",(int)(devices[i].sleep_queue));
                         while(devices[i].sleep_queue != NULL) {
                                 temp_tcb = devices[i].sleep_queue;
+                                //printf("current_time: %d ms\r\n",(int)millis);
                                 runqueue_add(temp_tcb, temp_tcb->cur_prio);
                                 devices[i].sleep_queue = temp_tcb->sleep_queue;
                                 temp_tcb->sleep_queue = NULL;

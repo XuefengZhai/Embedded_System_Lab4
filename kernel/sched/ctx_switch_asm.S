@@ -23,8 +23,14 @@
  * r5 contains the single argument to the user function called.
  * r6 contains the user-mode stack pointer.
  * Upon completion, we should be in user mode.
+ *
+ *
+ *
+ * For every task, which has never been launched before, this should be executed.
+ *
  */
 FUNC(launch_task)
+    @leave the sp in SVC mode as the TCB stack bottom (ktask_high[0])
 	mov     r0, r5
 	mov     r1, #0
 	mov     r2, #0
@@ -43,13 +49,13 @@ FUNC(launch_task)
 /* save the current context and load context */
 FUNC(ctx_switch_full)
 	stmia	r1,{r4-r11,sp,lr}
-	ldmfd	r0,{r4-r11,sp,lr}
-	mov	pc,lr
+	ldmia	r0,{r4-r11,sp,lr}
+	mov     pc,lr
 
 /*add your code to perform a half context switch */	
 FUNC(ctx_switch_half)
-	ldm	r0,{r4-r11,sp,lr}
-	mov	pc,lr
+	ldmia	r0,{r4-r11,sp,lr}
+	mov     pc,lr
 
 
 

@@ -1,0 +1,5 @@
+/home/parallels/Desktop/lab4_latest/kernel/start.o:  \
+ /home/parallels/Desktop/lab4_latest/kernel/start.S \
+  /home/parallels/Desktop/lab4_latest/kernel/include/asm.h
+
+/home/parallels/Desktop/lab4_latest/kernel/include/asm.h:

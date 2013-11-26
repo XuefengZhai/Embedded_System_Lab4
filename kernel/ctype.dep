@@ -1,0 +1,8 @@
+/home/parallels/Desktop/lab4_latest/kernel/ctype.o:  \
+ /home/parallels/Desktop/lab4_latest/kernel/ctype.c \
+  /home/parallels/Desktop/lab4_latest/kernel/include/ctype.h \
+  /home/parallels/Desktop/lab4_latest/kernel/include/inline.h
+
+/home/parallels/Desktop/lab4_latest/kernel/include/ctype.h:
+
+/home/parallels/Desktop/lab4_latest/kernel/include/inline.h:

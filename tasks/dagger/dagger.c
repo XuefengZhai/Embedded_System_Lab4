@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <task.h>
 #include <unistd.h>
-
+#include <bits/fileno.h>
 
 void panic(const char* str)
 {
@@ -52,7 +52,9 @@ int main(int argc, char** argv)
 	tasks[1].C = 1;
 	tasks[1].T = PERIOD_DEV1;
 
-	task_create(tasks, 2);
+
+	int error = task_create(tasks, 2);
+	printf("error number: %d \r\n",error);
 	argc=argc; /* remove compiler warning */
 	argv[0]=argv[0]; /* remove compiler warning */
 
