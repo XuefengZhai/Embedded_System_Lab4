@@ -40,7 +40,8 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     int i = 0;
     int j = 0;
     //sorted here!!! can we just sort the array of pointers?
-    
+    qsort(t_list,0,(int)num_tasks);
+    /*
     for(i = (int)num_tasks; i > 0; i--){
         for(j = 0; j < i-1; j++){
             if(((t_list+j)->T)>((t_list+j+1)->T)){
@@ -48,10 +49,33 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
              }	
          }
     }
-    for(i = 0; i < (int)num_tasks; i++){
-    }
+    */
 
-	return 1; // fix this; dummy return to prevent compiler warnings	
+
+
+    return 1; // fix this; dummy return to prevent compiler warnings	
+}
+
+
+void qsort(int s[], int l, int r)
+{
+    int i, j, x;
+    if (l < r)
+    {
+        i = l;
+        j = r;
+        x = s[i];
+        while (i < j)
+        {
+            while(i < j && s[j] > x) j--; 
+            if(i < j) s[i++] = s[j];
+            while(i < j && s[i] < x) i++; 
+            if(i < j) s[j--] = s[i];
+        }
+        s[i] = x;
+        qsort(s, l, i-1); 
+        qsort(s, i+1, r);
+    }
 }
 	
 
