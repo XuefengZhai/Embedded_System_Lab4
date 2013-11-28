@@ -36,16 +36,20 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
 
     unsigned int i = 0;
     for(i = 0; i < num_of_tasks; i++){
+        
+        //check if the task located in USR space.
+        if(valid_addr((void *)(t_list+i), 0, USR_START_ADDR, USR_END_ADDR) == 0){
+            printf("task created out of user space \r\n");
+            return -EFAULT;
+        }
+        
+        //check if the task's function located in USR space.
         if(valid_addr((void *)((t_list+i)->lambda), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task function out of valid address \r\n");
             return -EFAULT;
         }
         
-	if(valid_addr((void *)(t_list+i), 0, USR_START_ADDR, USR_END_ADDR) == 0){
-            printf("task created out of user space \r\n");
-	    return -EFAULT;
-	}
-        
+        //check if the task's stack located in USR space.
         if(valid_addr(((t_list+i)->stack_pos), 0, USR_START_ADDR, USR_END_ADDR) == 0){
             printf("task stack out of valid address \r\n");
             return -EFAULT;
@@ -55,7 +59,7 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
             printf("data out of valid address \r\n");
             return -EFAULT;
         }
-	*/
+         */
         
         /* sorted when returned from assign_schedule */
         if(assign_schedule(tasklist, num_of_tasks) == 0){
@@ -69,6 +73,7 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
             
     }
     
+    //check if different tasks using the same stack.
     unsigned int j = 0;
     for(i = 0; i < num_of_tasks-1; i++){
 	for (j = i; j < num_of_tasks-1; j++){
