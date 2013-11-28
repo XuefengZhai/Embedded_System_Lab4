@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_working/kernel/ctype.o:  \
- /home/parallels/Desktop/lab4_working/kernel/ctype.c \
-  /home/parallels/Desktop/lab4_working/kernel/include/ctype.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/inline.h
+/home/xzhai/Desktop/lab4/kernel/ctype.o:  \
+ /home/xzhai/Desktop/lab4/kernel/ctype.c \
+  /home/xzhai/Desktop/lab4/kernel/include/ctype.h \
+  /home/xzhai/Desktop/lab4/kernel/include/inline.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/ctype.h:
+/home/xzhai/Desktop/lab4/kernel/include/ctype.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/inline.h:
+/home/xzhai/Desktop/lab4/kernel/include/inline.h:

@@ -1,59 +1,59 @@
-/home/parallels/Desktop/lab4_working/kernel/main.o:  \
- /home/parallels/Desktop/lab4_working/kernel/main.c \
-  /home/parallels/Desktop/lab4_working/uboot/include/exports.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/types.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/stdarg.h \
-  /home/parallels/Desktop/lab4_working/uboot/include/_exports.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/inline.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/reg.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/interrupt.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/timer.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/kernel.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/kmain.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/constant.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/task.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/config.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/sched.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/assert.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/device.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/lock.h
+/home/xzhai/Desktop/lab4/kernel/main.o:  \
+ /home/xzhai/Desktop/lab4/kernel/main.c \
+  /home/xzhai/Desktop/lab4/uboot/include/exports.h \
+  /home/xzhai/Desktop/lab4/kernel/include/types.h \
+  /home/xzhai/Desktop/lab4/kernel/include/stdarg.h \
+  /home/xzhai/Desktop/lab4/uboot/include/_exports.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/psr.h \
+  /home/xzhai/Desktop/lab4/kernel/include/inline.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/reg.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/exception.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/interrupt.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/timer.h \
+  /home/xzhai/Desktop/lab4/kernel/include/kernel.h \
+  /home/xzhai/Desktop/lab4/kernel/include/kmain.h \
+  /home/xzhai/Desktop/lab4/kernel/include/constant.h \
+  /home/xzhai/Desktop/lab4/kernel/include/task.h \
+  /home/xzhai/Desktop/lab4/kernel/include/config.h \
+  /home/xzhai/Desktop/lab4/kernel/include/sched.h \
+  /home/xzhai/Desktop/lab4/kernel/include/assert.h \
+  /home/xzhai/Desktop/lab4/kernel/include/device.h \
+  /home/xzhai/Desktop/lab4/kernel/include/lock.h
 
-/home/parallels/Desktop/lab4_working/uboot/include/exports.h:
+/home/xzhai/Desktop/lab4/uboot/include/exports.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/types.h:
+/home/xzhai/Desktop/lab4/kernel/include/types.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/stdarg.h:
+/home/xzhai/Desktop/lab4/kernel/include/stdarg.h:
 
-/home/parallels/Desktop/lab4_working/uboot/include/_exports.h:
+/home/xzhai/Desktop/lab4/uboot/include/_exports.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/psr.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/inline.h:
+/home/xzhai/Desktop/lab4/kernel/include/inline.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/reg.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/reg.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/exception.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/exception.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/interrupt.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/interrupt.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/timer.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/timer.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/kernel.h:
+/home/xzhai/Desktop/lab4/kernel/include/kernel.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/kmain.h:
+/home/xzhai/Desktop/lab4/kernel/include/kmain.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/constant.h:
+/home/xzhai/Desktop/lab4/kernel/include/constant.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/task.h:
+/home/xzhai/Desktop/lab4/kernel/include/task.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/config.h:
+/home/xzhai/Desktop/lab4/kernel/include/config.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/sched.h:
+/home/xzhai/Desktop/lab4/kernel/include/sched.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/assert.h:
+/home/xzhai/Desktop/lab4/kernel/include/assert.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/device.h:
+/home/xzhai/Desktop/lab4/kernel/include/device.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/lock.h:
+/home/xzhai/Desktop/lab4/kernel/include/lock.h:

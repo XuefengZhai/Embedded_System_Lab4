@@ -1,5 +1,5 @@
-/home/parallels/Desktop/lab4_working/kernel/switchUser.o:  \
- /home/parallels/Desktop/lab4_working/kernel/switchUser.S \
-  /home/parallels/Desktop/lab4_working/kernel/include/bits/swi.h
+/home/xzhai/Desktop/lab4/kernel/switchUser.o:  \
+ /home/xzhai/Desktop/lab4/kernel/switchUser.S \
+  /home/xzhai/Desktop/lab4/kernel/include/bits/swi.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/bits/swi.h:
+/home/xzhai/Desktop/lab4/kernel/include/bits/swi.h:

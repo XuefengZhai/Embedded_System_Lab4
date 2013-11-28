@@ -1,20 +1,20 @@
-/home/parallels/Desktop/lab4_working/tasks/libc/stdio/hexdump.o:  \
- /home/parallels/Desktop/lab4_working/tasks/libc/stdio/hexdump.c \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/ctype.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/inline.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h
+/home/xzhai/Desktop/lab4/tasks/libc/stdio/hexdump.o:  \
+ /home/xzhai/Desktop/lab4/tasks/libc/stdio/hexdump.c \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/ctype.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/inline.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/stdio.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/stdarg.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/sys/types.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/bits/types.h
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/ctype.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/ctype.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/inline.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/inline.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/stdio.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/stdio.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/stdarg.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/stdarg.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/sys/types.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/sys/types.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/types.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/bits/types.h:

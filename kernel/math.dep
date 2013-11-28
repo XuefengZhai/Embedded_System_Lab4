@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_working/kernel/math.o:  \
- /home/parallels/Desktop/lab4_working/kernel/math.c \
-  /home/parallels/Desktop/lab4_working/kernel/include/types.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/math.h
+/home/xzhai/Desktop/lab4/kernel/math.o:  \
+ /home/xzhai/Desktop/lab4/kernel/math.c \
+  /home/xzhai/Desktop/lab4/kernel/include/types.h \
+  /home/xzhai/Desktop/lab4/kernel/include/math.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/types.h:
+/home/xzhai/Desktop/lab4/kernel/include/types.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/math.h:
+/home/xzhai/Desktop/lab4/kernel/include/math.h:

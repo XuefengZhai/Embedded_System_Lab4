@@ -15,6 +15,7 @@
 #include <arm/reg.h>
 #include <arm/psr.h>
 #include <arm/exception.h>
+#include <bits/errno.h>
 
 #define MAX_INT 0xFFFFFFFF
 
@@ -64,15 +65,20 @@ void dev_init(void)
  *
  * @param dev  Device number.
  */
-void dev_wait(unsigned int dev)
+int dev_wait(unsigned int dev)
 {
+    
     disable_interrupts();
     tcb_t* cur_tcb = get_cur_tcb();
+    
+    if(cur_tcb->holds_lock != 0)
+	return -1;
+
     cur_tcb->sleep_queue = devices[dev].sleep_queue;
     devices[dev].sleep_queue = cur_tcb;
     dispatch_sleep();
     enable_interrupts();
-
+    return 1;
 }
 
 

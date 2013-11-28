@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_working/kernel/arm/int_asm.o:  \
- /home/parallels/Desktop/lab4_working/kernel/arm/int_asm.S \
-  /home/parallels/Desktop/lab4_working/kernel/include/asm.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h
+/home/xzhai/Desktop/lab4/kernel/arm/int_asm.o:  \
+ /home/xzhai/Desktop/lab4/kernel/arm/int_asm.S \
+  /home/xzhai/Desktop/lab4/kernel/include/asm.h \
+  /home/xzhai/Desktop/lab4/kernel/include/arm/psr.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/asm.h:
+/home/xzhai/Desktop/lab4/kernel/include/asm.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/arm/psr.h:
+/home/xzhai/Desktop/lab4/kernel/include/arm/psr.h:

@@ -119,12 +119,17 @@ int task_create(task_t* tasks, size_t num_tasks)
 
 int event_wait(unsigned int dev)
 {
+
     enable_interrupts();
     if(dev >= NUM_DEVICES){
         printf("device number invalid \r\n");
         return -EINVAL;
     }
-    dev_wait(dev);
+    
+    if(dev_wait(dev) != 1){
+    	printf("current task holding lock(s)");
+	return -EHOLDSLOCK;
+    }
 
   return 0; 
 }

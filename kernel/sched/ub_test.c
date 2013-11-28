@@ -30,7 +30,12 @@
 int assign_schedule(task_t** tasks, size_t num_tasks)
 {
     task_t * t_list = *tasks;   
-    unsigned int k = 0; 
+    unsigned int k = 0;
+    double UB = 0;
+    double sum = 0;
+    double ubdk = 0;
+    double mul = 1;   
+
     for(k = 0; k < num_tasks; k++){
         if((t_list+k)->C > (t_list+k)->T){
             return 0;
@@ -39,78 +44,36 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
 
     int i = 0;
     int j = 0;
-    //sorted here!!! can we just sort the array of pointers?
-    //quickSort(t_list,0,(int)num_tasks - 1);
+
     
     for(i = (int)num_tasks; i > 0; i--){
         for(j = 0; j < i-1; j++){
             if(((t_list+j)->T)>((t_list+j+1)->T)){
             t_swap(t_list+j, t_list+j+1);
-             }	
+             }        
          }
     }
     
+    
+    for (i=0;i<(int)num_tasks;i++)
+	sum = sum + ((double)(t_list+i)->C)/((double)(t_list+i)->T);
+    
+    UB = sum+ ((double)(t_list+(int)num_tasks-1)->B)/((double)(t_list+(int)num_tasks-1)->T);
 
+    ubdk = UB/(double)k;
 
+    ubdk += 1;
+    for (i=0;i<(int)num_tasks;i++)
+	mul = mul * ubdk;
 
-    return 1; // fix this; dummy return to prevent compiler warnings	
+    if(mul>2)
+	return 0;
+
+    return 1;         
 }
 
 
-/**
- * 
- *
- * T = O(n)
- *
- */
- 
- /*
-int pivotLoc(task_t *arr, int bt, int ed)
-{
-	unsigned long stand;
-	task_t *pivot = arr;
-	
-	stand = arr[bt]->T;
 
-	while (bt < ed) {
-		while (bt < ed && arr[ed]->T >= stand)	ed --;
-		if (bt < ed){
-			t_swap(arr[bt],arr[ed] );
-			bt++;
-		} 
-
-		while (bt < ed && arr[bt]->T <= stand)	bt ++;
-		if (bt < ed){
-			t_swap(arr[bt],arr[ed] );
-			ed--;
-		}
-	}
-
-	arr[bt] = pivot;
-
-	return bt;
-}
-
-*/
-/**
- * quick sort
- *
- * T = O(nlogn)
- *
- */
- 
- /*
-void quickSort(task_t *arr, int bt, int ed)
-{
-	int pivot;
-
-	if (bt < ed) {
-		pivot = pivotLoc(arr, bt, ed);
-		quickSort(arr, bt, pivot - 1);
-		quickSort(arr, pivot + 1, ed);
-	}
-}
-*/
 void t_swap(task_t* t1, task_t* t2){
    
    task_t tmp;
@@ -130,4 +93,3 @@ void t_swap(task_t* t1, task_t* t2){
    t2->C = tmp.C;
    t2->T = tmp.T;
 }
-

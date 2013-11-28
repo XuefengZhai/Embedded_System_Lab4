@@ -1,5 +1,5 @@
-/home/parallels/Desktop/lab4_working/kernel/start.o:  \
- /home/parallels/Desktop/lab4_working/kernel/start.S \
-  /home/parallels/Desktop/lab4_working/kernel/include/asm.h
+/home/xzhai/Desktop/lab4/kernel/start.o:  \
+ /home/xzhai/Desktop/lab4/kernel/start.S \
+  /home/xzhai/Desktop/lab4/kernel/include/asm.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/asm.h:
+/home/xzhai/Desktop/lab4/kernel/include/asm.h:

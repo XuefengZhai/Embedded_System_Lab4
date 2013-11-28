@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_working/tasks/libc/swi/time.o:  \
- /home/parallels/Desktop/lab4_working/tasks/libc/swi/time.S \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h \
-  /home/parallels/Desktop/lab4_working/tasks/libc/include/bits/swi.h
+/home/xzhai/Desktop/lab4/tasks/libc/swi/time.o:  \
+ /home/xzhai/Desktop/lab4/tasks/libc/swi/time.S \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/asm.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/bits/swi.h
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/asm.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/asm.h:
 
-/home/parallels/Desktop/lab4_working/tasks/libc/include/bits/swi.h:
+/home/xzhai/Desktop/lab4/tasks/libc/include/bits/swi.h:

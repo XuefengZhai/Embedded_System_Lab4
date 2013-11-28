@@ -1,8 +1,8 @@
-/home/parallels/Desktop/lab4_working/kernel/arm/wire_in.o:  \
- /home/parallels/Desktop/lab4_working/kernel/arm/wire_in.c \
-  /home/parallels/Desktop/lab4_working/kernel/include/constant.h \
-  /home/parallels/Desktop/lab4_working/kernel/include/kmain.h
+/home/xzhai/Desktop/lab4/kernel/arm/wire_in.o:  \
+ /home/xzhai/Desktop/lab4/kernel/arm/wire_in.c \
+  /home/xzhai/Desktop/lab4/kernel/include/constant.h \
+  /home/xzhai/Desktop/lab4/kernel/include/kmain.h
 
-/home/parallels/Desktop/lab4_working/kernel/include/constant.h:
+/home/xzhai/Desktop/lab4/kernel/include/constant.h:
 
-/home/parallels/Desktop/lab4_working/kernel/include/kmain.h:
+/home/xzhai/Desktop/lab4/kernel/include/kmain.h:
