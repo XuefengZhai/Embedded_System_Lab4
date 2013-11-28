@@ -37,8 +37,8 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
         }
     }
 
-    int i = 0;
-    int j = 0;
+    //int i = 0;
+    //int j = 0;
     //sorted here!!! can we just sort the array of pointers?
     quickSort(t_list,0,(int)num_tasks - 1);
     /*
