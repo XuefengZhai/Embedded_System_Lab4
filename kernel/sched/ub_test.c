@@ -37,11 +37,11 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
         }
     }
 
-    //int i = 0;
-    //int j = 0;
+    int i = 0;
+    int j = 0;
     //sorted here!!! can we just sort the array of pointers?
-    quickSort(t_list,0,(int)num_tasks - 1);
-    /*
+    //quickSort(t_list,0,(int)num_tasks - 1);
+    
     for(i = (int)num_tasks; i > 0; i--){
         for(j = 0; j < i-1; j++){
             if(((t_list+j)->T)>((t_list+j+1)->T)){
@@ -49,7 +49,7 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
              }	
          }
     }
-    */
+    
 
 
 
@@ -63,6 +63,8 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
  * T = O(n)
  *
  */
+ 
+ /*
 int pivotLoc(task_t *arr, int bt, int ed)
 {
 	unsigned long stand;
@@ -89,12 +91,15 @@ int pivotLoc(task_t *arr, int bt, int ed)
 	return bt;
 }
 
+*/
 /**
  * quick sort
  *
  * T = O(nlogn)
  *
  */
+ 
+ /*
 void quickSort(task_t *arr, int bt, int ed)
 {
 	int pivot;
@@ -105,7 +110,7 @@ void quickSort(task_t *arr, int bt, int ed)
 		quickSort(arr, pivot + 1, ed);
 	}
 }
-
+*/
 void t_swap(task_t* t1, task_t* t2){
    
    task_t tmp;
