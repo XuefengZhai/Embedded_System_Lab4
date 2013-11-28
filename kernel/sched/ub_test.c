@@ -40,7 +40,7 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     int i = 0;
     int j = 0;
     //sorted here!!! can we just sort the array of pointers?
-    qsort(t_list,0,(int)num_tasks);
+    quickSort(t_list,0,(int)num_tasks - 1);
     /*
     for(i = (int)num_tasks; i > 0; i--){
         for(j = 0; j < i-1; j++){
@@ -57,27 +57,54 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
 }
 
 
-void qsort(int s[], int l, int r)
+/**
+ * 
+ *
+ * T = O(n)
+ *
+ */
+int pivotLoc(task_t *arr, int bt, int ed)
 {
-    int i, j, x;
-    if (l < r)
-    {
-        i = l;
-        j = r;
-        x = s[i];
-        while (i < j)
-        {
-            while(i < j && s[j] > x) j--; 
-            if(i < j) s[i++] = s[j];
-            while(i < j && s[i] < x) i++; 
-            if(i < j) s[j--] = s[i];
-        }
-        s[i] = x;
-        qsort(s, l, i-1); 
-        qsort(s, i+1, r);
-    }
-}
+	unsigned long stand;
+	task_t *pivot = arr;
 	
+	stand = arr[bt]->T;
+
+	while (bt < ed) {
+		while (bt < ed && arr[ed]->T >= stand)	ed --;
+		if (bt < ed){
+			t_swap(arr[bt],arr[ed] );
+			bt++;
+		} 
+
+		while (bt < ed && arr[bt]->T <= stand)	bt ++;
+		if (bt < ed){
+			t_swap(arr[bt],arr[ed] );
+			ed--;
+		}
+	}
+
+	arr[bt] = pivot;
+
+	return bt;
+}
+
+/**
+ * quick sort
+ *
+ * T = O(nlogn)
+ *
+ */
+void quickSort(task_t *arr, int bt, int ed)
+{
+	int pivot;
+
+	if (bt < ed) {
+		pivot = pivotLoc(arr, bt, ed);
+		quickSort(arr, bt, pivot - 1);
+		quickSort(arr, pivot + 1, ed);
+	}
+}
 
 void t_swap(task_t* t1, task_t* t2){
    
