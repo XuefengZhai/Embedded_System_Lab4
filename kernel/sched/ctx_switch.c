@@ -28,7 +28,7 @@ static tcb_t* cur_tcb; /* use this if needed */
  */
 void dispatch_init(tcb_t* idle __attribute__((unused)))
 {
-    
+    //we do not use this function.
 }
 
 
