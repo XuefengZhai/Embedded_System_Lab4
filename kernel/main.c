@@ -35,8 +35,6 @@ int kmain(int argc, char** argv, uint32_t table)
 	app_startup(); /* bss is valid after this point */
 	global_data = table;
 
-	/* Add your code here */
-
 	/* Install my swi handler and my irq handler */
 	int result = wire_in((unsigned int*)VECTOR_SWI, (unsigned int)&s_handler);
 	
