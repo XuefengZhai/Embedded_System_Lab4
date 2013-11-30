@@ -44,14 +44,14 @@ A user program starts from crt0.S, from which CPU will jump to the main function
 
 Graph1: How system call works:
 #########################################################################################
-#	     			    							#
-#--------------call--------------- swi ------------    -----------------		#
-#|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read.c	#
-#--------------    ---------------     -------------   ----------------- ----> write.c	#
-#									 ----> exit.c	#
-#									 ----> sleep.c	#
-#									 ----> time.c	#
-#											#
+#                                                                                       #
+#--------------call--------------- swi ------------    -----------------                #
+#|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read.c   #
+#--------------    ---------------     -------------   ----------------- ----> write.c  #
+#									 ----> exit.c                                                         #
+#									 ----> sleep.c                                                        #
+#									 ----> time.c                                                         #
+#                                                                                       #
 #########################################################################################
 
 In a user program, whenever a system function is called, the CPU will switch to SVC mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
