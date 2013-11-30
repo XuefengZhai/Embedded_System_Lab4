@@ -61,7 +61,7 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
         }
          */
         
-        /* sorted when returned from assign_schedule */
+        /* ubtest and sorted when returned from assign_schedule */
         if(assign_schedule(tasklist, num_of_tasks) == 0){
             printf("tasks not schedulable \r\n");
             return -ESCHED;
@@ -92,27 +92,23 @@ int check_validation(task_t** tasklist, size_t num_of_tasks){
 int task_create(task_t* tasks, size_t num_tasks)
 {
     
-    /* initialize the run queue, the mutex and the device */
+    /* initialize the run queue and the device */
     runqueue_init();
-    
     dev_init();
     
     /*check the validation of stack_pos, data, function, num_tasks and schedubility
      * and sort the task
      */
-
-
-    
     int check = check_validation(&tasks, num_tasks);
     if(check != 1){
         return check;
     }
     
- 
-    
+    /* load the task information into tcb */
     allocate_tasks(&tasks, num_tasks);
-    //sched_init();
-    dispatch_nosave();//dispatch the highest priority task
+    
+    /* dispatch the highest priority task */
+    dispatch_nosave();
     
     return 1;/* never return */
   }
