@@ -52,7 +52,8 @@ FUNC(ctx_switch_full)
 	ldmia	r0,{r4-r11,sp,lr}
 	mov     pc,lr
 
-/*add your code to perform a half context switch */	
+/* perform a half context switch */
+/* load context */
 FUNC(ctx_switch_half)
 	ldmia	r0,{r4-r11,sp,lr}
 	mov     pc,lr
