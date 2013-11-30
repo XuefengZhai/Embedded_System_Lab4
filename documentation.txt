@@ -58,15 +58,15 @@ In a user program, whenever a system function is called, the CPU will switch to 
 
 Graph2: How sleep() & time() utilize IRQ:
 #################################################################
-#			-------------------    checks		#
-#			|sleep(), time()  | ------------|	#
-#			-------------------             +	#
-#							|	#
-#	interrupt	call		    update	+	#
+#			-------------------    checks                             #
+#			|sleep(), time()  | ------------|                         #
+#			-------------------             +                         #
+#							|                                                 #
+#	interrupt	             call               update	+           #
 #--------    ------------    -----------------   -------------	#
 #|OStimer|-->|i_handler.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
 #--------    ------------    -----------------   -------------	#
-#								#
+#                                                               #
 #################################################################
 
 At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, and the CPU will switch to IRQ mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
