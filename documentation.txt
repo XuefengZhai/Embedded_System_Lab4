@@ -48,9 +48,9 @@ Graph1: How system call works:
 #--------------call--------------- swi ------------    -----------------                #
 #|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read.c   #
 #--------------    ---------------     -------------   ----------------- ----> write.c  #
-#									 ----> exit.c                                                         #
-#									 ----> sleep.c                                                        #
-#									 ----> time.c                                                         #
+#									 ----> exit.c   #
+#									 ----> sleep.c  #
+#									 ----> time.c   #
 #                                                                                       #
 #########################################################################################
 
@@ -58,11 +58,11 @@ In a user program, whenever a system function is called, the CPU will switch to 
 
 Graph2: How sleep() & time() utilize IRQ:
 #################################################################
-#			-------------------    checks                             #
-#			|sleep(), time()  | ------------|                         #
-#			-------------------             +                         #
-#							|                                                 #
-#     interrupt          call               update  +           #
+#			-------------------    checks           #
+#			|sleep(), time()  | ------------|       #
+#			-------------------             +       #
+#							|       #
+#     interrupt          call               update      +       #
 #--------    ------------    -----------------   -------------	#
 #|OStimer|-->|i_handler.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
 #--------    ------------    -----------------   -------------	#
