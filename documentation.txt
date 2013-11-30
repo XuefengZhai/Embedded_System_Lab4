@@ -3,6 +3,14 @@ Long Tu <longt@andrew.cmu.edu>
 Jiang Xue <jiangx@andrew.cmu.edu>
 Xuefeng Zhai <xzhai@cmu.edu>
 -----------------------------------------------------------------------------------------
+Summary:
+This document is a brief introduction of the lab 4 design for 18342. It is developed in the following sequences:
+First, we talk about how the kernel works and how SWI and IRQ handler works.
+Second, we give a detailed specification for each system call and illustrate how it works
+Third, we talk about some details of the context switch
+
+
+-----------------------------------------------------------------------------------------
 Kernel:
 
 This kernel installs two customized handlers and realizes five basic system call.
@@ -13,6 +21,9 @@ The installation is realized in main.c. In main.c, there is a function called wi
 The SWI handler handles a software interrupt, which is raised when a user program calls a system call. The function of SWI handler (s_handler.S and c_swi_handler.c) is restoring r8, enabling irq, storing and restoring the context of a user program, jump to a system call function according to the SWI number.
 
 The IRQ handler handles a timer interrupt, which is raised by the OS timer, built in the processor. The function of IRQ handler (i_handler.S and c_irq_handler.c) is storing and restoring the context of the previous mode (supervisor mode or user mode), checking the source of the interrupt, acknowledging the interrupt to pacify the device if the interrupt is from the OS timer, updating a global variable used for storing the time and restarting the timer. Specifically, when restarting the timer, I rewrite the OSMR with the frequency of the processor divided by 100 (1s=1000ms. 1000ms/10ms=100) and rewrite the OSCR with 0 to make it count from 0 again. This is how the time is counted, i.e. by interrupting the CPU every 10ms and updating the number of 10ms recorded in a global variable in the irq handler. In addition, the irq_handler will call dev_update() to check if the current time equals to the next_match of a device. If so, all the tasks in the sleep queue of that device will be waken up (added to run queue) and the next_match of that device will be updated. Besides, the irq_handler will call dispatch_save() which realizes a function of context switching to the highest priority runnable task if there is.
+
+-----------------------------------------------------------------------------------------
+System call:
 
 The nine system calls give the user program chance to use system-level resources.
 
@@ -103,4 +114,22 @@ At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, a
 When the user program accidentally returns to crt0.S, it will go into a dead loop.
 
 -------------------------------------------------------------------------------------------
+The design of context switch:
 
+Context Switch
+• dispatch_save: save the context of current task and context switch
+to highest priority task
+• dispatch_nosave: context switch to the highest priority task
+without worrying about saving current task’s context
+• dispatch_sleep: save current task’s context, make the current task
+not runnable and context switch
+
+ctx_switch_asm.S
+– ctx_switch_full will get called from dispatch_save and
+dispatch_sleep
+– ctx_switch_half will get called from dispatch_nosave
+
+The dispatch_save is called every 10 ms by c_irq_handler.c, then it checks if the current task is the highest priority task in the list. If it is not, the current context would be saved and the highest priority task would be removed from the runnable queue and get executed
+The dispatch_nosave is called once at the beginning, just to load register values into memory. 
+
+During the initialization, we set the value of lr to be the address of launch_task. so that for the first time a task is executed, it would go to the launch task to have an initial value of its registers. After that, it would retrive its value from the its context in tcb struct.
