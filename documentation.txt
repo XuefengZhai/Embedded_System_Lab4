@@ -79,20 +79,20 @@ When the kernel is loaded and executed, it starts from start.S and then jumps to
 A user program starts from crt0.S, from which CPU will jump to the main function of the user program.
 
 Graph1: How system call works:
-#########################################################################################
-#                                                                                       #
-#--------------call--------------- swi ------------    -----------------                #
-#|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read     #
-#--------------    ---------------     -------------   ----------------- ----> write    #
+###############################################################################################  
+#                                                                                             #
+#--------------call--------------- swi ------------    -----------------                      #
+#|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read           #
+#--------------    ---------------     -------------   ----------------- ----> write          #
 #									 ----> mutex_create   #
-#									 ----> mutex_lock   #
+#									 ----> mutex_lock     #
 #									 ----> mutex_unlock   #
-#									 ----> task_create   #
-#									 ----> event_wait   #
-#									 ----> sleep    #
-#									 ----> time     #
-#                                                                                       #
-#########################################################################################
+#									 ----> task_create    #
+#									 ----> event_wait     #
+#									 ----> sleep          #
+#									 ----> time           #
+#                                                                                             #
+###############################################################################################
 
 In a user program, whenever a system function is called, the CPU will switch to SVC mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
 
@@ -106,7 +106,7 @@ Graph2: How sleep() & time() utilize IRQ:
 #--------    ------------    -----------------   -------------	#
 #|OStimer|-->|int_asm.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
 #--------    ------------    -----------------   -------------	#
-#                                                               #
+#                                           dispatch_save       #
 #################################################################
 
 At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, and the CPU will go through the irq_wrapper and handle irq interrupts in SVC mode. The c_irq_handler will realize the function discussed in the last section. 
