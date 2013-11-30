@@ -48,6 +48,7 @@ void dispatch_save(void)
 		return;
 	}
 	else{
+		//find the highest prio task and remove it from the list
 		tcb_t *rm = runqueue_remove(highest_prio());
 		runqueue_add(cur_tcb,cur_tcb->native_prio);
 		cur_tcb = rm; 
