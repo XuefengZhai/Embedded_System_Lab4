@@ -43,6 +43,7 @@ void dispatch_init(tcb_t* idle __attribute__((unused)))
 void dispatch_save(void)
 {
 	tcb_t *tmp = cur_tcb;
+	// if current prio is less than highest, return
 	if(get_cur_prio() <= highest_prio()){
 		return;
 	}
