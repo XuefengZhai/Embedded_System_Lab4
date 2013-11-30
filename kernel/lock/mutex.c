@@ -121,7 +121,6 @@ int mutex_lock(int mutex)
     }
     
     /*
-     * Lock the mutex
      * Add task to sleep queue if mutex is using
      */
     else
@@ -158,6 +157,9 @@ int mutex_lock(int mutex)
         }
     }
     
+    /*
+     *Lock the mutex
+     */
     mutex_tmp->bLock = TRUE;
     mutex_tmp->pHolding_Tcb = cur_tcb;
     cur_tcb->holds_lock += 1;
