@@ -64,7 +64,7 @@ Graph2: How sleep() & time() utilize IRQ:
 #							|       #
 #     interrupt          call               update      +       #
 #--------    ------------    -----------------   -------------	#
-#|OStimer|-->|i_handler.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
+#|OStimer|-->|int_asm.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
 #--------    ------------    -----------------   -------------	#
 #                                                               #
 #################################################################
