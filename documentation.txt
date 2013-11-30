@@ -12,18 +12,15 @@ The installation is realized in main.c. In main.c, there is a function called wi
 
 The SWI handler handles a software interrupt, which is raised when a user program calls a system call. The function of SWI handler (s_handler.S and c_swi_handler.c) is restoring r8, enabling irq, storing and restoring the context of a user program, jump to a system call function according to the SWI number.
 
-The IRQ handler handles a timer interrupt, which is raised by the OS timer, built in the processor. The function of IRQ handler (i_handler.S and c_irq_handler.c) is storing and restoring the context of the previous mode (supervisor mode or user mode), checking the source of the interrupt, acknowledging the interrupt to pacify the device if the interrupt is from the OS timer, updating a global variable used for storing the time and restarting the timer. Specifically, when restarting the timer, I rewrite the OSMR with the frequency of the processor divided by 100 (1s=1000ms. 1000ms/10ms=100) and rewrite the OSCR with 0 to make it count from 0 again. This is how the time is counted, i.e. by interrupting the CPU every 10ms and updating the number of 10ms recorded in a global variable in the irq handler.
+The IRQ handler handles a timer interrupt, which is raised by the OS timer, built in the processor. The function of IRQ handler (i_handler.S and c_irq_handler.c) is storing and restoring the context of the previous mode (supervisor mode or user mode), checking the source of the interrupt, acknowledging the interrupt to pacify the device if the interrupt is from the OS timer, updating a global variable used for storing the time and restarting the timer. Specifically, when restarting the timer, I rewrite the OSMR with the frequency of the processor divided by 100 (1s=1000ms. 1000ms/10ms=100) and rewrite the OSCR with 0 to make it count from 0 again. This is how the time is counted, i.e. by interrupting the CPU every 10ms and updating the number of 10ms recorded in a global variable in the irq handler. In addition, the irq_handler will call dev_update() to check if the current time equals to the next_match of a device. If so, all the tasks in the sleep queue of that device will be waken up (added to run queue) and the next_match of that device will be updated. Besides, the irq_handler will call dispatch_save() which realizes a function of context switching to the highest priority runnable task if there is.
 
-The five system calls give the user program chance to use system-level resources.
+The nine system calls give the user program chance to use system-level resources.
 
 Time: 
 unsigned long time() implements the function of getting the time elapsed since the kernel booted up. It has no input parameter and reruns a unsigned long integer which has a resolution of 10ms. When the function is called, it will get the value of the global variable used for storing time, multiply 10 to this value and return it to the user program.
 
 Sleep: 
-void sleep(unsigned long millis) implements the function of suspending the user program for ÒmillisÓ milliseconds. When the function is called, it will get the current time (the number of 10ms elapsed since kernel booted up) and plus the value of ÒmillisÓto get the expected time to return to user programs. Then a loop will be executed until the current time (by checking the global variable) exceeds the expected time. And the function returns to handler.
-
-Exit: 
-void exit(int status) implements the function of exiting from the user program back to the kernel main function. When the function is called, it will restore the original first two instructions of the original SWI handler and the original IRQ handler. Then it will restore the registers to how they are like in the kernel (before calling switchUser(unsigned int user stack pointer)). Finally, it goes back to the kmain() in the main.c
+void sleep(unsigned long millis) implements the function of suspending the user program for millis milliseconds. When the function is called, it will get the current time (the number of 10ms elapsed since kernel booted up) and plus the value of millis to get the expected time to return to user programs. Then a loop will be executed until the current time (by checking the global variable) exceeds the expected time. And the function returns to handler.
 
 write:
 It takes three input, fd, buf and count. fd is the file descriptor. buf is the buffer and count is the number of characters in the buffer. The program first checks if the start address and the end address are in the right location in the memory. Then it handles the short count situation. If all the process works all right. I t would return the number of character it writes. Or else, it would return a "-EFAULT".
@@ -36,9 +33,15 @@ Read System Call implements the following function:
 4. Read the user input characters into the buffer from stdin and echo the character back to stdout.
 5. If the input has an EOT character, the read system call should return immediately with the number of characters read into the buffer thus far.
 
+Task Create:
+int task_create(task_t * tasks, size_t num_tasks) create a number of tasks specified by user. The function first initialize the run queue and the device, then checks the validation of tasks descriptor passed in from the user and the schedulability of the tasks. Next it initializes the array of tcb based on the tasks descriptor. Finally, it launches the highest priority task. Return error number to the variable errono when error happens, e.g. tasks created out of user space, tasks are not schedulable.
+
+Event Wait:
+int event_wait(unsigned int dev), this function puts the task who called into the sleep queue of the device specified by the user (the parameter, dev). Return error number to the variable errno when error happens, e.g. device number is larger than the largest allowed device number.
+
 To make it more clear that how the kernel works. The following statements show the process of how a user program being run in this kernel:
 
-When the kernel is loaded and executed, it starts from start.S and then jumps to the kmain function. In the kamin function, the customized SWI handler and IRQ handler are installed. Then the user stack bottom is set to a3000000 and the arguments are stored into the user stack. The following step is setting the IRQ stack. In my design, the IRQ stack is located in data section. It is implemented by defining a global array of unsigned integer and passing the address of the last element in the array to a function called setup_irq_stack, in which the address is assigned to the stack pointer in IRQ mode.Then the interrupt controller is initialized by disabling the mask of OSTIMER_0 and unsetting the least significant bit of ICLR to make the OSTIMER generate an IRQ interrupt rather than a FRQ interrupt. Next, the timer is initialized, i.e. enabling the interrupt, setting a value (discussed above) into OSMR, and starting counting (writing 0 to OSCR). Then the CPU jumps to switchUser function to enable irq and disable frq, to store the context and store the stack pointer to a global variable, to switch to USER Mode and to jump to 0xa0000000 where user program is loaded.
+When the kernel is loaded and executed, it starts from start.S and then jumps to the kmain function. In the kamin function, the customized SWI handler and IRQ handler are installed. Then the user stack bottom is set to a3000000 and the arguments are stored into the user stack. The following step is setting the IRQ stack. In my design, the IRQ stack is located in data section. It is implemented by defining a global array of unsigned integer and passing the address of the last element in the array to a function called setup_irq_stack, in which the address is assigned to the stack pointer in IRQ mode.Then the interrupt controller is initialized by disabling the mask of OSTIMER_0 and unsetting the least significant bit of ICLR to make the OSTIMER generate an IRQ interrupt rather than a FRQ interrupt. Next, the timer is initialized, i.e. enabling the interrupt, setting a value (discussed above) into OSMR, and starting counting (writing 0 to OSCR). Then the mutex_init() is called here to initialize all the mutexes. Then the CPU jumps to switchUser function to enable irq and disable frq, to store the context and store the stack pointer to a global variable, to switch to USER Mode and to jump to 0xa0000000 where user program is loaded.
 
 A user program starts from crt0.S, from which CPU will jump to the main function of the user program.
 
@@ -73,9 +76,9 @@ Graph2: How sleep() & time() utilize IRQ:
 #                                                               #
 #################################################################
 
-At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, and the CPU will switch to IRQ mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
+At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, and the CPU will go through the irq_wrapper and handle irq interrupts in SVC mode. The c_irq_handler will realize the function discussed in the last section. 
 
-When the user program returns to crt0.S, a exit system function is called to jump back to kmain. Finally kmain will return to Uboot.
+When the user program accidentally returns to crt0.S, it will go into a dead loop.
 
 -------------------------------------------------------------------------------------------
 
