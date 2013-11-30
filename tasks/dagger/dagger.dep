@@ -1,15 +1,13 @@
-/home/xzhai/Desktop/lab4/tasks/mutex_chaser/mutex_chaser.o:  \
- /home/xzhai/Desktop/lab4/tasks/mutex_chaser/mutex_chaser.c \
+/home/xzhai/Desktop/lab4/tasks/dagger/dagger.o:  \
+ /home/xzhai/Desktop/lab4/tasks/dagger/dagger.c \
   /home/xzhai/Desktop/lab4/tasks/libc/include/stdio.h \
   /home/xzhai/Desktop/lab4/tasks/libc/include/stdarg.h \
   /home/xzhai/Desktop/lab4/tasks/libc/include/sys/types.h \
   /home/xzhai/Desktop/lab4/tasks/libc/include/bits/types.h \
+  /home/xzhai/Desktop/lab4/tasks/libc/include/task.h \
   /home/xzhai/Desktop/lab4/tasks/libc/include/unistd.h \
   /home/xzhai/Desktop/lab4/tasks/libc/include/bits/fileno.h \
-  /home/xzhai/Desktop/lab4/tasks/libc/include/task.h \
-  /home/xzhai/Desktop/lab4/tasks/libc/include/lock.h \
-  /home/xzhai/Desktop/lab4/tasks/libc/include/bits/errno.h \
-  /home/xzhai/Desktop/lab4/tasks/libc/include/errno.h
+  /home/xzhai/Desktop/lab4/tasks/libc/include/lock.h
 
 /home/xzhai/Desktop/lab4/tasks/libc/include/stdio.h:
 
@@ -19,14 +17,10 @@
 
 /home/xzhai/Desktop/lab4/tasks/libc/include/bits/types.h:
 
+/home/xzhai/Desktop/lab4/tasks/libc/include/task.h:
+
 /home/xzhai/Desktop/lab4/tasks/libc/include/unistd.h:
 
 /home/xzhai/Desktop/lab4/tasks/libc/include/bits/fileno.h:
 
-/home/xzhai/Desktop/lab4/tasks/libc/include/task.h:
-
 /home/xzhai/Desktop/lab4/tasks/libc/include/lock.h:
-
-/home/xzhai/Desktop/lab4/tasks/libc/include/bits/errno.h:
-
-/home/xzhai/Desktop/lab4/tasks/libc/include/errno.h:
