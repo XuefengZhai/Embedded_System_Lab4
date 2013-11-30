@@ -35,7 +35,10 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
     double sum = 0;
     double ubdk = 0;
     double mul = 1;   
-
+    
+    /*
+     * Not schedualable when C greater then T
+     */
     for(k = 0; k < num_tasks; k++){
         if((t_list+k)->C > (t_list+k)->T){
             return 0;
@@ -44,7 +47,10 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
 
     int i = 0;
     int j = 0;
-
+    
+    /*
+     * Sort the tasks by its T value
+     */
     
     for(i = (int)num_tasks; i > 0; i--){
         for(j = 0; j < i-1; j++){
@@ -54,6 +60,15 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
          }
     }
     
+    /*
+     * Calculating the UB admissibility rule 
+     * to ensure that the given task set is schedulable.
+     * We converted the fomular
+     * ->UB<=k*(2^(1/k)-1)
+     * ->(UB/k+1)^(k)<=2
+     * So we check if (UB/k+1)^(k) is greater then 2
+     * return 0, which means it is not schedualable.
+     */
     
     for (i=0;i<(int)num_tasks;i++)
 	sum = sum + ((double)(t_list+i)->C)/((double)(t_list+i)->T);
@@ -73,7 +88,9 @@ int assign_schedule(task_t** tasks, size_t num_tasks)
 }
 
 
-
+/*
+ * Swap all the content of 2 tasks
+ */
 void t_swap(task_t* t1, task_t* t2){
    
    task_t tmp;
