@@ -33,11 +33,33 @@ Read System Call implements the following function:
 4. Read the user input characters into the buffer from stdin and echo the character back to stdout.
 5. If the input has an EOT character, the read system call should return immediately with the number of characters read into the buffer thus far.
 
+Mutex_create
+Create a mutex for a task to use and return the number of the mutex.
+First find an available mutex by searching for the bAvailable of all the mutex.
+If there is no available mutex, return -ENOMEM as an error number.
+If an available mutex is funded, mark the bAvailable as FLASE and return the mutex number to the task and the mutex for this task is created.
+
+Mutex_lock
+When a task requires to lock a mutex, this function lock the mutex. If the task requires for a mutex that is locked by another task, the task is added to the sleep queue of the mutex.
+First this function need to judge if the required mutex is valid, created and the task is not using the mutex. If any of these is not true, return an error number.
+Then, if the mutex is currently locked by another task, add the mutex to the sleep queue.
+If the mutex is not locked by another task, mark the bLock as True and assign the tasks to the pHolding_tcb of the mutex.
+Also, mark the cur_prio of the tasks as 0 to ensure priority inheritance by HLP.
+
+Mutex_unlock
+When a task requires to unlock a mutex, this function unlock the mutex.
+First this function need to judge if the required mutex is valid, created and the task is not using the mutex. If any of these is not true, return an error number.
+Then,  unlock the mutex by marking the bLock as FALSE and pHolding_tcb as NULL. 
+If the sleep queue of the mutex is not empty, using runqueue_add() to add the next task to the mutex accruing to priority.
+Finally, assign the native_prio to the current_prio of the task to ensure priority inheritance by HLP.
+
 Task Create:
 int task_create(task_t * tasks, size_t num_tasks) create a number of tasks specified by user. The function first initialize the run queue and the device, then checks the validation of tasks descriptor passed in from the user and the schedulability of the tasks. Next it initializes the array of tcb based on the tasks descriptor. Finally, it launches the highest priority task. Return error number to the variable errono when error happens, e.g. tasks created out of user space, tasks are not schedulable.
 
 Event Wait:
 int event_wait(unsigned int dev), this function puts the task who called into the sleep queue of the device specified by the user (the parameter, dev). Return error number to the variable errno when error happens, e.g. device number is larger than the largest allowed device number.
+
+
 
 To make it more clear that how the kernel works. The following statements show the process of how a user program being run in this kernel:
 
