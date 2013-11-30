@@ -50,7 +50,7 @@ void dispatch_save(void)
 		tcb_t *rm = runqueue_remove(highest_prio());
 		runqueue_add(cur_tcb,cur_tcb->native_prio);
 		cur_tcb = rm; 
-        ctx_switch_full(&(rm->context),&(tmp->context));
+		ctx_switch_full(&(rm->context),&(tmp->context));
 	}
 
 }
