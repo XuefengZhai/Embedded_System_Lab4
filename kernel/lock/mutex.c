@@ -161,7 +161,7 @@ int mutex_lock(int mutex)
     mutex_tmp->bLock = TRUE;
     mutex_tmp->pHolding_Tcb = cur_tcb;
     cur_tcb->holds_lock += 1;
-    cur_tcb->cur_prio = 0;
+    cur_tcb->cur_prio = 0; // Priority Inheritance by HLP
     enable_interrupts();
     
     return 0;
@@ -229,7 +229,7 @@ int mutex_unlock(int mutex)
             runqueue_add(next_tcb, next_tcb->cur_prio);
         }
         
-	cur_tcb->cur_prio = cur_tcb->native_prio;
+	cur_tcb->cur_prio = cur_tcb->native_prio;// Priority Inheritance by HLP
 	cur_tcb->holds_lock -= 1;
         enable_interrupts();
 

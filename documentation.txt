@@ -1,0 +1,112 @@
+Documentation Lab3
+Long Tu <longt@andrew.cmu.edu>
+Jiang Xue <jiangx@andrew.cmu.edu>
+Xuefeng Zhai <xzhai@cmu.edu>
+-----------------------------------------------------------------------------------------
+Kernel:
+
+This kernel installs two customized handlers and realizes five basic system call.
+The two handlers are SWI handler and IRQ handler.
+
+The installation is realized in main.c. In main.c, there is a function called wire_in, with two input parameters,  a pointer pointing to a certain address in the VectorTable and the address of my handler. The wire_in function will find out the address of the original handler and modify the first two instructions by which the CPU will jump to our own handler. Additionally, the original first two instructions will be stored in global variables (data section). The return value of wire_in function is -1 when there is an error when installing the handlers. This function is called by kmain, which is the main function of the kernel.
+
+The SWI handler handles a software interrupt, which is raised when a user program calls a system call. The function of SWI handler (s_handler.S and c_swi_handler.c) is restoring r8, enabling irq, storing and restoring the context of a user program, jump to a system call function according to the SWI number.
+
+The IRQ handler handles a timer interrupt, which is raised by the OS timer, built in the processor. The function of IRQ handler (i_handler.S and c_irq_handler.c) is storing and restoring the context of the previous mode (supervisor mode or user mode), checking the source of the interrupt, acknowledging the interrupt to pacify the device if the interrupt is from the OS timer, updating a global variable used for storing the time and restarting the timer. Specifically, when restarting the timer, I rewrite the OSMR with the frequency of the processor divided by 100 (1s=1000ms. 1000ms/10ms=100) and rewrite the OSCR with 0 to make it count from 0 again. This is how the time is counted, i.e. by interrupting the CPU every 10ms and updating the number of 10ms recorded in a global variable in the irq handler.
+
+The five system calls give the user program chance to use system-level resources.
+
+Time: 
+unsigned long time() implements the function of getting the time elapsed since the kernel booted up. It has no input parameter and reruns a unsigned long integer which has a resolution of 10ms. When the function is called, it will get the value of the global variable used for storing time, multiply 10 to this value and return it to the user program.
+
+Sleep: 
+void sleep(unsigned long millis) implements the function of suspending the user program for ÒmillisÓ milliseconds. When the function is called, it will get the current time (the number of 10ms elapsed since kernel booted up) and plus the value of ÒmillisÓto get the expected time to return to user programs. Then a loop will be executed until the current time (by checking the global variable) exceeds the expected time. And the function returns to handler.
+
+Exit: 
+void exit(int status) implements the function of exiting from the user program back to the kernel main function. When the function is called, it will restore the original first two instructions of the original SWI handler and the original IRQ handler. Then it will restore the registers to how they are like in the kernel (before calling switchUser(unsigned int user stack pointer)). Finally, it goes back to the kmain() in the main.c
+
+write:
+It takes three input, fd, buf and count. fd is the file descriptor. buf is the buffer and count is the number of characters in the buffer. The program first checks if the start address and the end address are in the right location in the memory. Then it handles the short count situation. If all the process works all right. I t would return the number of character it writes. Or else, it would return a "-EFAULT".
+
+Read:
+Read System Call implements the following function:
+1. Read system call takes three arguments, the file descriptor for reading, a buffer for writing and the number of bytes to read.
+2. Return -EBADF for any file descriptor that doesn’t match stdin
+3. Return -EFAULT if the memory range specified by the buffer and its maximum size exists outside the range of heap or free part of the SDRAM.
+4. Read the user input characters into the buffer from stdin and echo the character back to stdout.
+5. If the input has an EOT character, the read system call should return immediately with the number of characters read into the buffer thus far.
+
+To make it more clear that how the kernel works. The following statements show the process of how a user program being run in this kernel:
+
+When the kernel is loaded and executed, it starts from start.S and then jumps to the kmain function. In the kamin function, the customized SWI handler and IRQ handler are installed. Then the user stack bottom is set to a3000000 and the arguments are stored into the user stack. The following step is setting the IRQ stack. In my design, the IRQ stack is located in data section. It is implemented by defining a global array of unsigned integer and passing the address of the last element in the array to a function called setup_irq_stack, in which the address is assigned to the stack pointer in IRQ mode.Then the interrupt controller is initialized by disabling the mask of OSTIMER_0 and unsetting the least significant bit of ICLR to make the OSTIMER generate an IRQ interrupt rather than a FRQ interrupt. Next, the timer is initialized, i.e. enabling the interrupt, setting a value (discussed above) into OSMR, and starting counting (writing 0 to OSCR). Then the CPU jumps to switchUser function to enable irq and disable frq, to store the context and store the stack pointer to a global variable, to switch to USER Mode and to jump to 0xa0000000 where user program is loaded.
+
+A user program starts from crt0.S, from which CPU will jump to the main function of the user program.
+
+Graph1: How system call works:
+#########################################################################################
+#	     			    							#
+#--------------call--------------- swi ------------    -----------------		#
+#|user program|--->|wrappers: *.S|---->|s_handler.S|-->|c_swi_handler.c| ----> read.c	#
+#--------------    ---------------     -------------   ----------------- ----> write.c	#
+#									 ----> exit.c	#
+#									 ----> sleep.c	#
+#									 ----> time.c	#
+#											#
+#########################################################################################
+
+In a user program, whenever a system function is called, the CPU will switch to SVC mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
+
+Graph2: How sleep() & time() utilize IRQ:
+#################################################################
+#			-------------------    checks		#
+#			|sleep(), time()  | ------------|	#
+#			-------------------             +	#
+#							|	#
+#	interrupt	call		    update	+	#
+#--------    ------------    -----------------   -------------	#
+#|OStimer|-->|i_handler.S|-->|c_irq_handler.c|-->|num_of_10ms|	#
+#--------    ------------    -----------------   -------------	#
+#								#
+#################################################################
+
+At the same time, every 10ms passed, the OSTIMER_0 will generate an interrupt, and the CPU will switch to IRQ mode automatically and execute the customized SWI handler. Then the handler will realize the function discussed in the last section. 
+
+When the user program returns to crt0.S, a exit system function is called to jump back to kmain. Finally kmain will return to Uboot.
+
+-------------------------------------------------------------------------------------------
+
+Test Programs:
+
+splat.c:
+Splat use a while loop to display a spinning cursor. The cursor transition between the following states: |/-\ and transition between them once every 200 ms.
+
+Typo.c:
+Typo is a test program that use the time, read and write system call to read input of user and then echo the user and calculate the time the user spent when typing the string.
+
+Bomb.c: 
+This program implements a mine sweeper that need the user to find all the bombs in a matrix by typing the location of an available spot. The program has the following components:
+
+1. First, it tells a story of a professor who want to test your ability. In this, we use sleep method to make the program runs like someone is typing out there.
+2. Then the program utilize sleep method to print out a image of a bomb. (ASCII ART)
+3. Then we use the time() to generate a random bomb array that represents the location of a bomb within the matrix
+4. Then we ask the user to type in the possible available spot in the matrix and print the whole board after the user types in the input.
+5. If the user wins, we simply print out the congratulations message. If he/she loses, we also print an image of the bombing.
+
+The algorithm for the mine sweeper is as follows: after the user choose a certain location, the program would use recursion to test if the area becomes bigger to the other locations.
+
+How does it test the system calls:
+For sleep(): it uses sleep to print out all the animations for the game and the words that the "professor" types.
+For time(): it uses time to calculate the total time that a user uses to finish all the games.
+For read(): it uses read to ask for user input
+
+Typetest.c:
+Typetest is a test program that use the time(), read() and write() system call to test the accuracy and time when user typed a given random string.
+1. Generate a random string using the time system call.
+2. Start the timer
+3. Read in the user input
+4. Stop the timer
+5. Compare the user input with the given random string
+5. Provide feed back of the mistakes the user made when typing the given random string and calculate how much time the user spend on typing the given string
+6. If the input has a backspace or delete character, the read system call should not be placed in the buffer or echoed to stdout. The previous character should be removed.
+7. If the input has a newline or carriage return character, the read system call should place a newline in the buffer and echoed to stdout. The read system call return with the number of characters read into the buffer so far.
+
